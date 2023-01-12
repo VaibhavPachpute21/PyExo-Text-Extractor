@@ -10,7 +10,7 @@ class ExtractAndForward():
     def ImageSplitter(self,filePath,templatePath):
         img = cv2.imread(filePath)
         template = cv2.imread(templatePath)
-        
+        percents = []
     
         orb = cv2.ORB_create(nfeatures=500)
         kp1, des1 = orb.detectAndCompute(img, None)
@@ -22,13 +22,22 @@ class ExtractAndForward():
         matches = sorted(matches, key=lambda x: x.distance)
         
         match_img = cv2.drawMatches(img, kp1, template, kp2, matches[:50], None)
-    
-        # Find the number of matches
         num_matches = len(matches)
 
-        # Find the percentage match
+
+        
         percent_match = (num_matches / len(kp1)) * 100
-        print("Percentage match: ", percent_match)
+
+        percents.append(percent_match)
+
+        if templatePath == 'src/templates/voter1.jpg':
+            Max = max(percents)
+
+            percents=[]
+            print(Max)
+            print(filePath,templatePath)
+
+        
 
         cv2.imshow('Matc',match_img)
         cv2.waitKey(0)
@@ -44,6 +53,7 @@ class ExtractAndForward():
             for filePath in filesPaths:
                 for templatePath in templates:
                     self.ImageSplitter(filePath,templatePath)
+
 
     def FindPaths(self):
         folder_path = 'src/test'
