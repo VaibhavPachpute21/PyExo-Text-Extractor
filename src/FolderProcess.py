@@ -12,7 +12,7 @@ class ExtractAndForward():
             if os.path.isfile(file_path):
                 with open(file_path, 'r') as f:
                     content = f.read()
-                    # Do something with the file's content
+                    
                     print(content)
             
     
