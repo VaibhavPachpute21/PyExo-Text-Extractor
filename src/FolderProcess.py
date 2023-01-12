@@ -15,6 +15,10 @@ class ExtractAndForward():
         # bnwImg2=cv2.cvtColor(template,cv2.COLOR_BGR2GRAY)
         cv2.imshow('GRAY Template IMG',template)
         cv2.waitKey(0)
+        mse = cv2.norm(img, template, cv2.NORM_L2) / (img.size)
+        print(mse)
+        
+
 
         """ Match """
 
@@ -32,7 +36,7 @@ class ExtractAndForward():
         filesPaths = self.FindPaths()
         print(filesPaths)
         if len(filesPaths) > 0:
-            templates = ['src/imgs/templates/aadharFront.jpg','src/imgs/templates/driving.jpg','src/imgs/templates/pan-card.png','src/imgs/templates/passport.png','src/imgs/templates/voter.jpg']
+            templates = ['src/imgs/templates/aadharFront.jpg','src/imgs/templates/driving.jpg','src/imgs/templates/pan-card.png','src/imgs/templates/passport.png','src/imgs/templates/voter1.jpg']
             for filePath in filesPaths:
                 for templatePath in templates:
                     self.ImageSplitter(filePath,templatePath)
