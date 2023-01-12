@@ -4,13 +4,15 @@ import cv2
 
 class ExtractAndForward():
     def __init__(self):
-        pass    
+        self.iterator = 0
+        self.InterMediateMax = []
+        self.MaxMatches = []
 
 
     def ImageSplitter(self,filePath,templatePath):
         img = cv2.imread(filePath)
         template = cv2.imread(templatePath)
-        percents = []
+        
     
         orb = cv2.ORB_create(nfeatures=500)
         kp1, des1 = orb.detectAndCompute(img, None)
@@ -27,21 +29,21 @@ class ExtractAndForward():
 
         
         percent_match = (num_matches / len(kp1)) * 100
+            
+        self.InterMediateMax.append(percent_match)
 
-        percents.append(percent_match)
+        self.iterator = self.iterator + 1
+        if self.iterator == 5:
 
-        if templatePath == 'src/templates/voter1.jpg':
-            Max = max(percents)
+            self.MaxMatches.append(max(self.InterMediateMax))
+            self.iterator = 0
+            self.InterMediateMax = []
 
-            percents=[]
-            print(Max)
-            print(filePath,templatePath)
-
-        
-
+        print(self.MaxMatches)
         cv2.imshow('Matc',match_img)
         cv2.waitKey(0)
 
+        print(self.MaxMatches)
 
                
 
