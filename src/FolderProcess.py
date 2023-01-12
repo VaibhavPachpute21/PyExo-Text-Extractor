@@ -13,8 +13,8 @@ class ExtractAndForward():
         filesPaths = self.FindPaths()
 
         if len(filesPaths) > 0:
-            docs = ['']
 
+            templates = ['src/imgs/templates/aadhar.jpg']
 
             """ Initiate image splitter here """
 
