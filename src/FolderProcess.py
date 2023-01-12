@@ -1,4 +1,5 @@
 import os
+import cv2
 
 
 class ExtractAndForward():
@@ -6,31 +7,32 @@ class ExtractAndForward():
         pass    
 
 
-    def ImageSplitter(self):
-
-
-        pass
+    def ImageSplitter(self,i,j):
+        print(i,j);
 
 
     def ExtractAadhar(self):
         filesPaths = self.FindPaths()
         print(filesPaths)
         if len(filesPaths) > 0:
-
-            templates = ['src/imgs/templates/aadhar.jpg',]
-
-            """ Initiate image splitter here """
+            templates = ['src/imgs/templates/aadharFront.jpg','src/imgs/templates/driving.jpg','src/imgs/templates/pan.jpg','src/imgs/templates/passport.jpg']
+            for i in filesPaths:
+                for j in templates:
+                    self.ImageSplitter(i,j)
+                
+            
 
 
     def FindPaths(self):
         folder_path = 'src/test'
-        paths = []
-        for filename in os.listdir(folder_path):
-            file_path = os.path.join(folder_path, filename)
-            if os.path.isfile(file_path):
-                paths.append(file_path.replace("\\", "/"))
-
-                return paths
+        arr=[]
+        paths=os.listdir(folder_path)
+        for path in paths:
+            fpath=folder_path+'/'+path;
+            print(fpath)
+            arr.append(fpath)
+        
+        return arr;
 
                 
             
