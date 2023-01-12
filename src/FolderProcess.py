@@ -1,20 +1,23 @@
 import os
 
+
 class ExtractAndForward():
     def __init__(self):
         pass    
 
 
     def ImageSplitter(self):
+
+
         pass
 
 
     def ExtractAadhar(self):
         filesPaths = self.FindPaths()
-
+        print(filesPaths)
         if len(filesPaths) > 0:
 
-            templates = ['src/imgs/templates/aadhar.jpg']
+            templates = ['src/imgs/templates/aadhar.jpg',]
 
             """ Initiate image splitter here """
 
@@ -34,5 +37,4 @@ class ExtractAndForward():
     
 files = ExtractAndForward()
 files.ExtractAadhar()
-
 
