@@ -8,7 +8,7 @@ class ExtractAndForward():
 
 
     def ImageSplitter(self,i,j):
-        print(i,j);
+        print(i,j)
 
 
     def ExtractAadhar(self):
@@ -28,11 +28,11 @@ class ExtractAndForward():
         arr=[]
         paths=os.listdir(folder_path)
         for path in paths:
-            fpath=folder_path+'/'+path;
+            fpath=folder_path+'/'+path
             print(fpath)
             arr.append(fpath)
         
-        return arr;
+        return arr
 
                 
             
