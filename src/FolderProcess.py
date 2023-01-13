@@ -1,11 +1,11 @@
 import os
 import cv2
+from Aadhar_textDetect import ExtractData
 
 
 class ExtractAndForward():
     def __init__(self):
         self.iterator = 0
-        
         self.InterMediateMax = []
         self.MaxMatches = []
         self.InterMediateFilePaths = []
@@ -19,9 +19,11 @@ class ExtractAndForward():
         opimg = cv2.imread(file)
         fulPath=os.getcwd()+'\\src\\outputs\\%s'%fileName
 
-        cv2.imwrite(fulPath ,opimg)
-        cv2.imshow('Output Images', opimg)
-        cv2.waitKey(0)
+        # cv2.imwrite(fulPath ,opimg)
+        # cv2.imshow('Output Images', opimg)
+        # cv2.waitKey(0)
+        extractData=ExtractData(file)
+
 
 
     def ImageSplitter(self,filePath,templatePath):
