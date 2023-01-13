@@ -9,19 +9,35 @@ class ExtractData():
    def __init__(self,file):
       self.file=file
 
-      image=cv2.imread(file);
+      image=cv2.imread(file)
 
-      text = pytesseract.image_to_string(image,lang='eng+hin')
+      text = pytesseract.image_to_string(image,lang='eng+hin+mar')
+      string = str(text)
+      
 
-      string = text
+      match1 = re.search(r'\d{10}', string)
+      match2 = re.search(r"\d{4}\s\d{4}\s\d{4}", string)
 
-      # Check if the string contains 12 digits using regular expression
-      match = re.search(r'\d{12}', string)
 
-      if match:
-         print(text)
+
+      if match1 and ("आधार - आदमी का अधकिर" in string):
+         filePath = os.getcwd()+'\\src\\extracts\\%s'%match1.group(0)+'_aadhar'
+
+         with open(filePath, "w", encoding="utf-8") as file:
+            file.write(str(string))
+
+      elif match2 and ("आधार - सामान्य माणसाचा अधिकार" in string):
+         filePath = os.getcwd()+'\\src\\extracts\\%s'%match2.group(0)+'_aadhar'
+
+         with open(filePath, "w", encoding="utf-8") as file:
+            file.write(str(string))
+
+
       else:
-         print("The string does not contain 12 digits.")
+         pass
+         
 
 
-      pass
+
+
+

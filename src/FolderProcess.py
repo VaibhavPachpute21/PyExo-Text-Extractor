@@ -22,7 +22,7 @@ class ExtractAndForward():
         # cv2.imwrite(fulPath ,opimg)
         # cv2.imshow('Output Images', opimg)
         # cv2.waitKey(0)
-        extractData=ExtractData(file)
+        ExtractData(file)
 
 
 
@@ -49,7 +49,7 @@ class ExtractAndForward():
         percent_match = (len(good_matches) / len(kp1)) * 100
         self.InterMediateMax.append(percent_match)
         self.InterMediateFilePaths.append(filePath)
-        
+  
         if len(self.InterMediateMax) == 5:
             self.MaxMatches.append(max(self.InterMediateMax))
             max_ind = self.InterMediateMax.index(max(self.InterMediateMax))
@@ -57,11 +57,6 @@ class ExtractAndForward():
 
             self.InterMediateMax = []
             self.InterMediateFilePaths = []
-
-
-            
-
-
         
         img3 = cv2.drawMatches(img, kp1, template, kp2, good_matches, None, flags=cv2.DrawMatchesFlags_NOT_DRAW_SINGLE_POINTS)
   
