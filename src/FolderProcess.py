@@ -7,7 +7,6 @@ class ExtractAndForward():
         self.iterator = 0
         self.InterMediateMax = []
         self.MaxMatches = []
-        
         self.InterMediateFilePaths = []
         self.MatchedPaths = []
 
@@ -33,7 +32,22 @@ class ExtractAndForward():
                 good_matches.append(m)
         
         percent_match = (len(good_matches) / len(kp1)) * 100
-        print(percent_match)
+        # print(percent_match)
+
+        self.InterMediateMax.append(percent_match)
+        self.InterMediateFilePaths.append(templatePath)
+
+        self.iterator = self.iterator + 1
+       
+        if self.iterator == 5:
+            self.MaxMatches.append(max(self.InterMediateMax))
+            max_ind = self.MaxMatches.index(max(self.MaxMatches))
+            self.MatchedPaths.append(self.InterMediateFilePaths[max_ind])
+            self.iterator = 0   
+            self.InterMediateMax = []
+        print(self.iterator)
+
+        
 
 
 
