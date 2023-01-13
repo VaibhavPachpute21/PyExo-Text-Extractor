@@ -14,22 +14,14 @@ class ExtractAndForward():
 
     def ProvideOutput(self,file):
 
-        ogfile = file
-        file = file.split('/')[-1]
+        fileName = file.split('/')[-1]
+        
+        opimg = cv2.imread(file)
+        print(fileName)
 
-        file_path = 'src/outputs/{file}'
-        
-        imgog = cv2.imread(ogfile)
-        cv2.imwrite(file_path,imgog)
-        
-        cv2.imshow('Output Images', imgog)
+        cv2.imwrite('D:\\Web\\eCell\\src\\outputs\\%s' %fileName ,opimg)
+        cv2.imshow('Output Images', opimg)
         cv2.waitKey(0)
-        cv2.destroyAllWindows()
-        
-            
-        
-
-
 
 
     def ImageSplitter(self,filePath,templatePath):
