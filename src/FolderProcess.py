@@ -17,9 +17,9 @@ class ExtractAndForward():
         fileName = file.split('/')[-1]
         
         opimg = cv2.imread(file)
-        print(fileName)
+        fulPath=os.getcwd()+'\\src\\outputs\\%s'%fileName
 
-        cv2.imwrite('D:\\Web\\eCell\\src\\outputs\\%s' %fileName ,opimg)
+        cv2.imwrite(fulPath ,opimg)
         cv2.imshow('Output Images', opimg)
         cv2.waitKey(0)
 
