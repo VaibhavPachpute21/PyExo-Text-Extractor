@@ -91,9 +91,9 @@ class ExtractAndForward():
         paths=os.listdir(folder_path)
         for path in paths:
             fpath=folder_path+'/'+path
-
+            
             arr.append(fpath)
-        
+                
         return arr
 
 
