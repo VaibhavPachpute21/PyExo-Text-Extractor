@@ -14,44 +14,51 @@ class ExtractAndForward():
     def ImageSplitter(self,filePath,templatePath):
         img = cv2.imread(filePath)
         template = cv2.imread(templatePath)
-        
-    
-        orb = cv2.ORB_create(nfeatures=500)
-        kp1, des1 = orb.detectAndCompute(img, None)
-        kp2, des2 = orb.detectAndCompute(template, None)
-        
-        bf = cv2.BFMatcher(cv2.NORM_HAMMING, crossCheck=True)
-        matches = bf.match(des1, des2)
-        
-        matches = sorted(matches, key=lambda x: x.distance)
-        
-        match_img = cv2.drawMatches(img, kp1, template, kp2, matches[:50], None)
-        num_matches = len(matches)
+        img = cv2.resize(img, template.shape[:2][::-1], interpolation = cv2.INTER_LINEAR)
+        # template = cv2.resize(template, img.shape[:2][::-1], interpolation = cv2.INTER_LINEAR)
+        # img=cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
+        # template=cv2.cvtColor(template,cv2.COLOR_BGR2GRAY)
+        sift = cv2.xfeatures2d.SIFT_create()
+        kp1, des1 = sift.detectAndCompute(img, None)
+        kp2, des2 = sift.detectAndCompute(template, None)
 
-    
+
+        matcher = cv2.FlannBasedMatcher()
+        matches = matcher.knnMatch(des1, des2, k=2)
+
+
+        good_matches = []
+        for m,n in matches:
+            if m.distance < 0.7*n.distance:
+                good_matches.append(m)
         
-        percent_match = (num_matches / len(kp1)) * 100
-            
-        self.InterMediateMax.append(percent_match)
-        self.InterMediateFilePaths.append(templatePath)
+        percent_match = (len(good_matches) / len(kp1)) * 100
+        print(percent_match)
+
+
+
+        img3 = cv2.drawMatches(img, kp1, template, kp2, good_matches, None, flags=cv2.DrawMatchesFlags_NOT_DRAW_SINGLE_POINTS)
+        
 
 
         self.iterator = self.iterator + 1
        
-        if self.iterator == 5:
+        # if self.iterator == 5:
 
-            self.MaxMatches.append(max(self.InterMediateMax))
-            max_ind = self.MaxMatches.index(max(self.MaxMatches))
+        #     self.MaxMatches.append(max(self.InterMediateMax))
+        #     max_ind = self.MaxMatches.index(max(self.MaxMatches))
 
-            self.MatchedPaths.append(self.InterMediateFilePaths[max_ind])
-            self.iterator = 0   
-            self.InterMediateMax = []
-
-
-        print(self.MatchedPaths)
-        print(percent_match)
-        cv2.imshow('Matc',match_img)
+        #     self.MatchedPaths.append(self.InterMediateFilePaths[max_ind])
+        #     self.iterator = 0   
+        #     self.InterMediateMax = []
+        
+        cv2.imshow('Matched Images', img3)
         cv2.waitKey(0)
+        cv2.destroyAllWindows()
+        # print(self.MatchedPaths)
+        # print(percent_match)
+        # cv2.imshow('Matc',match_img)
+        # cv2.waitKey(0)
 
 
 
