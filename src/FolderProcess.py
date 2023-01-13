@@ -5,19 +5,39 @@ import cv2
 class ExtractAndForward():
     def __init__(self):
         self.iterator = 0
-        print(self.iterator)
+        
         self.InterMediateMax = []
         self.MaxMatches = []
         self.InterMediateFilePaths = []
         self.MatchedPaths = []
 
+
+    def ProvideOutput(self,file):
+
+        ogfile = file
+        file = file.split('/')[-1]
+
+        file_path = 'src/outputs/{file}'
+        
+        imgog = cv2.imread(ogfile)
+        cv2.imwrite(file_path,imgog)
+        
+        cv2.imshow('Output Images', imgog)
+        cv2.waitKey(0)
+        cv2.destroyAllWindows()
+        
+            
+        
+
+
+
+
     def ImageSplitter(self,filePath,templatePath):
         img = cv2.imread(filePath)
         template = cv2.imread(templatePath)
         img = cv2.resize(img, template.shape[:2][::-1], interpolation = cv2.INTER_LINEAR)
-        # template = cv2.resize(template, img.shape[:2][::-1], interpolation = cv2.INTER_LINEAR)
-        # img=cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
-        # template=cv2.cvtColor(template,cv2.COLOR_BGR2GRAY)
+        
+
         sift = cv2.xfeatures2d.SIFT_create()
         kp1, des1 = sift.detectAndCompute(img, None)
         kp2, des2 = sift.detectAndCompute(template, None)
@@ -33,57 +53,34 @@ class ExtractAndForward():
                 good_matches.append(m)
         
         percent_match = (len(good_matches) / len(kp1)) * 100
-        
-
         self.InterMediateMax.append(percent_match)
+        self.InterMediateFilePaths.append(filePath)
         
         if len(self.InterMediateMax) == 5:
+            self.MaxMatches.append(max(self.InterMediateMax))
             max_ind = self.InterMediateMax.index(max(self.InterMediateMax))
             self.MatchedPaths.append(self.InterMediateFilePaths[max_ind])
+
             self.InterMediateMax = []
-        
-        
+            self.InterMediateFilePaths = []
 
-        self.InterMediateFilePaths.append(templatePath)
 
-        self.iterator = self.iterator + 1
-
-        """ if self.iterator == 9:
-            self.MaxMatches.append(max(self.InterMediateMax))
-            max_ind = self.MaxMatches.index(max(self.MaxMatches))
-            self.MatchedPaths.append(self.InterMediateFilePaths[max_ind])
-            self.iterator = 0   
-            self.InterMediateMax = []
-
-        print(self.iterator) """
+            
 
 
         
-
-
-
         img3 = cv2.drawMatches(img, kp1, template, kp2, good_matches, None, flags=cv2.DrawMatchesFlags_NOT_DRAW_SINGLE_POINTS)
+  
+
+        if len(self.MatchedPaths) == 4:
+
+            for x in range(0, len(self.MatchedPaths)):
+                self.ProvideOutput(self.MatchedPaths[x])
         
-
-
-        self.iterator = self.iterator + 1
-       
-        # if self.iterator == 5:
-
-        #     self.MaxMatches.append(max(self.InterMediateMax))
-        #     max_ind = self.MaxMatches.index(max(self.MaxMatches))
-
-        #     self.MatchedPaths.append(self.InterMediateFilePaths[max_ind])
-        #     self.iterator = 0   
-        #     self.InterMediateMax = []
         
-        cv2.imshow('Matched Images', img3)
+        """ cv2.imshow('Matched Images', img3)
         cv2.waitKey(0)
-        cv2.destroyAllWindows()
-        # print(self.MatchedPaths)
-        # print(percent_match)
-        # cv2.imshow('Matc',match_img)
-        # cv2.waitKey(0)
+        cv2.destroyAllWindows() """
 
 
 
@@ -91,7 +88,7 @@ class ExtractAndForward():
 
     def ExtractAadhar(self):
         filesPaths = self.FindPaths()
-        print(filesPaths)
+
         if len(filesPaths) > 0:
             templates = ['src/imgs/templates/aadharFront.jpg','src/imgs/templates/driving.jpg','src/imgs/templates/pan-card.png','src/imgs/templates/passport.png','src/imgs/templates/voter1.jpg']
             for filePath in filesPaths:
@@ -105,7 +102,7 @@ class ExtractAndForward():
         paths=os.listdir(folder_path)
         for path in paths:
             fpath=folder_path+'/'+path
-            print(fpath)
+
             arr.append(fpath)
         
         return arr
