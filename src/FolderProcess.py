@@ -5,6 +5,7 @@ import cv2
 class ExtractAndForward():
     def __init__(self):
         self.iterator = 0
+        print(self.iterator)
         self.InterMediateMax = []
         self.MaxMatches = []
         self.InterMediateFilePaths = []
@@ -32,20 +33,30 @@ class ExtractAndForward():
                 good_matches.append(m)
         
         percent_match = (len(good_matches) / len(kp1)) * 100
-        # print(percent_match)
+        
 
         self.InterMediateMax.append(percent_match)
+        
+        if len(self.InterMediateMax) == 5:
+            max_ind = self.InterMediateMax.index(max(self.InterMediateMax))
+            self.MatchedPaths.append(self.InterMediateFilePaths[max_ind])
+            self.InterMediateMax = []
+        
+        
+
         self.InterMediateFilePaths.append(templatePath)
 
         self.iterator = self.iterator + 1
-       
-        if self.iterator == 5:
+
+        """ if self.iterator == 9:
             self.MaxMatches.append(max(self.InterMediateMax))
             max_ind = self.MaxMatches.index(max(self.MaxMatches))
             self.MatchedPaths.append(self.InterMediateFilePaths[max_ind])
             self.iterator = 0   
             self.InterMediateMax = []
-        print(self.iterator)
+
+        print(self.iterator) """
+
 
         
 
