@@ -7,7 +7,9 @@ class ExtractAndForward():
         self.iterator = 0
         self.InterMediateMax = []
         self.MaxMatches = []
-
+        
+        self.InterMediateFilePaths = []
+        self.MatchedPaths = []
 
     def ImageSplitter(self,filePath,templatePath):
         img = cv2.imread(filePath)
@@ -26,24 +28,32 @@ class ExtractAndForward():
         match_img = cv2.drawMatches(img, kp1, template, kp2, matches[:50], None)
         num_matches = len(matches)
 
-
+    
         
         percent_match = (num_matches / len(kp1)) * 100
             
         self.InterMediateMax.append(percent_match)
+        self.InterMediateFilePaths.append(templatePath)
+
 
         self.iterator = self.iterator + 1
+       
         if self.iterator == 5:
 
             self.MaxMatches.append(max(self.InterMediateMax))
-            self.iterator = 0
+            max_ind = self.MaxMatches.index(max(self.MaxMatches))
+
+            self.MatchedPaths.append(self.InterMediateFilePaths[max_ind])
+            self.iterator = 0   
             self.InterMediateMax = []
 
-        print(self.MaxMatches)
+
+        print(self.MatchedPaths)
+        print(percent_match)
         cv2.imshow('Matc',match_img)
         cv2.waitKey(0)
 
-        print(self.MaxMatches)
+
 
                
 
