@@ -32,7 +32,7 @@ class ExtractData():
                 file.write(str(string).replace('\t', '').replace('\n\n', '\n'))
 
         else:
-            print(file)
+            pass
             # print(string)
 
 

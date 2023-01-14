@@ -25,7 +25,7 @@ class ExtractAndForward():
         ExtractData(file)
 
     def ImageSplitter(self, filePath, templatePath):
-        print(filePath,":",templatePath)
+ 
         img = cv2.imread(filePath)
         template = cv2.imread(templatePath)
         img = cv2.resize(
@@ -69,14 +69,15 @@ class ExtractAndForward():
 
     def ExtractAadhar(self):
         filesPaths = self.FindPaths()
-        
+    
         templates = ['src/imgs/templates/aadharFront.jpg', 'src/imgs/templates/driving.jpg',
                          'src/imgs/templates/pan-card.png', 'src/imgs/templates/passport.png', 'src/imgs/templates/voter1.jpg']
-        if len(filesPaths) > 0:
-            print(filesPaths)
-            for x in range(0,len(filesPaths)+1):
-                for y in range(0,len(templates)-1):
-                    self.ImageSplitter(filesPaths[x], templates[y])
+        
+        
+        for x in filesPaths:
+            print(x, "JUST X")
+            for y in templates:
+                self.ImageSplitter(x,y)
 
     def FindPaths(self):
         folder_path = 'src/test'
