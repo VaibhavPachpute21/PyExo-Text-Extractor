@@ -11,24 +11,29 @@ class ExtractData():
     def __init__(self, file):
         self.file = file
         image = cv2.imread(file)
-
+        print(file)
         text = pytesseract.image_to_string(image, lang='eng+hin+mar')
         string = str(text)
-        print(string)
+        # print(string)
 
-        match2 = re.search(r"\d{4}\s\d{4}\s\d{4}", string)
-        match3 = re.search(r'[A-Z]{5}[0-9]{4}[A-Z]{1}', string)
+        # match2 = re.search(r"\d{4}\s\d{4}\s\d{4}", string)
+        # match3 = re.search(r'[A-Z]{5}[0-9]{4}[A-Z]{1}', string)
         # for Aadhar Card
-        if match2 and ("आधार" in string) or ("अधिकार" in string):
-            filePath = os.getcwd()+'\\src\\extracts\\%s_aadhar.txt' % match2
+        if ("आधार" in string) or ("अधिकार" in string):
+            aadhar_no = re.search(r"\d{4}\s\d{4}\s\d{4}", string).group(0)
+            filePath = os.getcwd()+'\\src\\extracts\\%s_aadhar.txt' % aadhar_no
             with open(filePath, "w", encoding="utf-8") as file:
                 file.write(string.replace('\t', '').replace('\n\n', '\n'))
 
-        if match3 and ('Permanent Account Number' in string):
+        if ('Permanent Account Number' in string):
             PanNO = str(string).split('Number')[1].split('\n')[1]
-            filePath = os.getcwd()+'\\src\\extracts\\%s_pan.txt' % PanNO
+            filePath = os.getcwd()+'\\src\\extracts\\%s_pan.txt'%PanNO
             with open(filePath, "w", encoding="utf-8") as file:
                 file.write(str(string).replace('\t', '').replace('\n\n', '\n'))
+
+        else:
+            print(file)
+            # print(string)
 
 
 folder_path = 'src/extracts'
@@ -77,4 +82,4 @@ for path in paths:
     else:
         pass
 
-print(aadhar_arr)
+# print(aadhar_arr)
