@@ -74,10 +74,10 @@ for path in paths:
                gender = 'Male' 
             
             aadharObj = {
-               aadhar_no_form:aadhar_no_form,
-               full_name: full_name,
-               dob:dob,
-               gender:gender
+               "Adhar_Card_No":aadhar_no_form,
+               "Full_Name": full_name,
+               "DOB":dob,
+               "Gender":gender
             }
             
             aadhar_arr.append(aadharObj)
