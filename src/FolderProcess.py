@@ -69,13 +69,14 @@ class ExtractAndForward():
 
     def ExtractAadhar(self):
         filesPaths = self.FindPaths()
-        print(filesPaths)
+        
         templates = ['src/imgs/templates/aadharFront.jpg', 'src/imgs/templates/driving.jpg',
                          'src/imgs/templates/pan-card.png', 'src/imgs/templates/passport.png', 'src/imgs/templates/voter1.jpg']
         if len(filesPaths) > 0:
-            for filePath in filesPaths:
-                for templatePath in templates:
-                    self.ImageSplitter(filePath, templatePath)
+            print(filesPaths)
+            for x in range(0,len(filesPaths)+1):
+                for y in range(0,len(templates)-1):
+                    self.ImageSplitter(filesPaths[x], templates[y])
 
     def FindPaths(self):
         folder_path = 'src/test'
