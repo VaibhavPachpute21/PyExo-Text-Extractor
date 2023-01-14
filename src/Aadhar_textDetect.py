@@ -14,7 +14,7 @@ class ExtractData():
         # print(file)
         text = pytesseract.image_to_string(image, lang='eng+hin+mar')
         string = str(text)
-        # print(string)
+        print(string)
 
         # match2 = re.search(r"\d{4}\s\d{4}\s\d{4}", string)
         # match3 = re.search(r'[A-Z]{5}[0-9]{4}[A-Z]{1}', string)
@@ -33,7 +33,8 @@ class ExtractData():
                 file.write(str(string).replace('\t', '').replace('\n\n', '\n'))
 
         else:
-            print(string)
+            # print(string)
+            pass
 
 
 folder_path = 'src/extracts'

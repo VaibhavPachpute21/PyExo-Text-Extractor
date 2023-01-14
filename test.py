@@ -9,7 +9,7 @@ os.environ['TESSDATA_PREFIX'] = 'C:\Program Files\Tesseract-OCR\\tessdata'
 image=cv2.imread('D:\Web\eCell\src\\test\pan1.jpg')
 
 text = pytesseract.image_to_string(image, lang='eng+hin+mar')
-print(text)
+
 
 
 if str(text).__contains__('Permanent Account Number'):

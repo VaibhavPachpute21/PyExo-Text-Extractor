@@ -58,10 +58,10 @@ class ExtractAndForward():
         img3 = cv2.drawMatches(img, kp1, template, kp2, good_matches,
                                None, flags=cv2.DrawMatchesFlags_NOT_DRAW_SINGLE_POINTS)
 
-        if len(self.MatchedPaths) == 4:
+        
 
-            for x in range(0, len(self.MatchedPaths)):
-                self.ProvideOutput(self.MatchedPaths[x])
+        for x in range(0, len(self.MatchedPaths)):
+            self.ProvideOutput(self.MatchedPaths[x])
 
         """ cv2.imshow('Matched Images', img3)
         cv2.waitKey(0)
@@ -75,7 +75,7 @@ class ExtractAndForward():
         
         
         for x in filesPaths:
-            print(x, "JUST X")
+            # print(x, "JUST X")
             for y in templates:
                 self.ImageSplitter(x,y)
 
