@@ -12,7 +12,6 @@ image=cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 cv2.imshow("Driving",image)
 cv2.waitKey(0)
 
-
 text=pytesseract.image_to_string(image,lang='eng+hin+mar')
 
 print(str(text).replace('\t','').replace('\n\n','\n'))
