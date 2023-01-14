@@ -11,28 +11,24 @@ class ExtractData():
     def __init__(self, file):
         self.file = file
         image = cv2.imread(file)
-        
+
         text = pytesseract.image_to_string(image, lang='eng+hin+mar')
         string = str(text)
-        
-        match2 = re.search(r"\d{4}\s\d{4}\s\d{4}", string).group(0)
-         #for Aadhar Card
+        print(string)
+
+        match2 = re.search(r"\d{4}\s\d{4}\s\d{4}", string)
+        match3 = re.search(r'[A-Z]{5}[0-9]{4}[A-Z]{1}', string)
+        # for Aadhar Card
         if match2 and ("आधार" in string) or ("अधिकार" in string):
-            
-            filePath = os.getcwd()+'\\src\\extracts\\%s_aadhar.txt'%match2
+            filePath = os.getcwd()+'\\src\\extracts\\%s_aadhar.txt' % match2
             with open(filePath, "w", encoding="utf-8") as file:
                 file.write(string.replace('\t', '').replace('\n\n', '\n'))
 
-        
-        #for Pan Card
-        elif string.__contains__('Permanent Account Number'):
-         PanNO=str(text).split('Number')[1].split('\n')[1]
-         filePath = os.getcwd()+'\\src\\extracts\\%s_pan.txt'%PanNO
-         with open(filePath, "w", encoding="utf-8") as file:
-            file.write(str(text).replace('\t','').replace('\n\n','\n'))
-
-        else:
-            pass
+        if match3 and ('Permanent Account Number' in string):
+            PanNO = str(string).split('Number')[1].split('\n')[1]
+            filePath = os.getcwd()+'\\src\\extracts\\%s_pan.txt' % PanNO
+            with open(filePath, "w", encoding="utf-8") as file:
+                file.write(str(string).replace('\t', '').replace('\n\n', '\n'))
 
 
 folder_path = 'src/extracts'
@@ -48,23 +44,21 @@ for path in paths:
             string = file.read()
 
             aadhar_no_form = re.search(r"\d{4}\s\d{4}\s\d{4}", string).group(0)
-            
+
             full_name = string.split('जन्म')[0].split('\n')[-2]
-            
-       
+
             result = re.sub(r'[^a-zA-Z]', '', full_name)
             name_result = ''
             for i, c in enumerate(result):
                 if c.isupper() and i != 0:
                     name_result += " "
                 name_result += c
-            
+
             try:
                 dob = re.search(r'\d{2}/\d{2}/\d{4}', string).group(0)
-                
+
             except:
                 pass
-
 
             gender = ''
 
@@ -72,17 +66,15 @@ for path in paths:
                 gender = 'Female'
             else:
                 gender = 'Male'
-            
+
             aadharObj = {
                 "Adhar_Card_No": aadhar_no_form,
                 "Full_Name": name_result,
                 "DOB": dob,
                 "Gender": gender
             }
-            aadhar_arr.append(aadharObj) 
+            aadhar_arr.append(aadharObj)
     else:
         pass
 
 print(aadhar_arr)
-
-
