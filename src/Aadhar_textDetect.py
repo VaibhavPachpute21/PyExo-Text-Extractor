@@ -11,7 +11,7 @@ class ExtractData():
     def __init__(self, file):
         self.file = file
         image = cv2.imread(file)
-        print(file)
+        # print(file)
         text = pytesseract.image_to_string(image, lang='eng+hin+mar')
         string = str(text)
         # print(string)
