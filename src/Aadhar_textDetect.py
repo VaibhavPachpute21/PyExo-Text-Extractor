@@ -14,26 +14,20 @@ class ExtractData():
 
       text = pytesseract.image_to_string(image,lang='eng+hin+mar')
       string = str(text)
-      
+      print(string)      
 
-      match1 = re.search(r'\d{10}', string)
       match2 = re.search(r"\d{4}\s\d{4}\s\d{4}", string)
 
 
 
-      if match1 and ("आधार - आदमी का अधकिर" in string):
-         filePath = os.getcwd()+'\\src\\extracts\\%s'%match1.group(0)+'_aadhar'
+      if ("आधार" in string) or ("अधिकार" in string) or ("पहचान" in string):
+         filePath = os.getcwd()+'\\src\\extracts\\%s'%match2.group(0)+'_aadhar'
 
          with open(filePath, "w", encoding="utf-8") as file:
             file.write(str(string))
             
       
           
-      elif match2 and ("आधार - सामान्य माणसाचा अधिकार" in string):
-         filePath = os.getcwd()+'\\src\\extracts\\%s'%match2.group(0)+'_aadhar'
-
-         with open(filePath, "w", encoding="utf-8") as file:
-            file.write(str(string))
             
          
 
@@ -51,7 +45,7 @@ class ExtractData():
 
 
 
-folder_path = 'src/extracts'
+""" folder_path = 'src/extracts'
 paths=os.listdir(folder_path)
 arr = []
 aadhar_arr = []
@@ -74,10 +68,10 @@ for path in paths:
                gender = 'Male' 
             
             aadharObj = {
-               aadhar_no_form:aadhar_no_form,
-               full_name: full_name,
-               dob:dob,
-               gender:gender
+               'aadhar_no_form':aadhar_no_form,
+               'full_name': full_name,
+               'dob':dob,
+               'gender':gender
             }
             
             aadhar_arr.append(aadharObj)
@@ -88,4 +82,4 @@ for path in paths:
 
 
 
-print(aadhar_arr)
+print(aadhar_arr) """

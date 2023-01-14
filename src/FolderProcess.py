@@ -19,9 +19,9 @@ class ExtractAndForward():
         opimg = cv2.imread(file)
         fulPath=os.getcwd()+'\\src\\outputs\\%s'%fileName
 
-        # cv2.imwrite(fulPath ,opimg)
-        # cv2.imshow('Output Images', opimg)
-        # cv2.waitKey(0)
+        cv2.imwrite(fulPath ,opimg)
+        cv2.imshow('Output Images', opimg)
+        cv2.waitKey(0)
         ExtractData(file)
 
 
