@@ -2,32 +2,49 @@ import pytesseract
 import cv2
 import os
 import re
+import numpy as np
 
 pytesseract.pytesseract.tesseract_cmd = r'C:\\Program Files\\Tesseract-OCR\\tesseract.exe'
 os.environ['TESSDATA_PREFIX'] = 'C:\Program Files\Tesseract-OCR\\tessdata'
 
-image=cv2.imread('./src/test/adhar5.jpg')
-template = cv2.imread('./src/imgs/templates/aadharFront.jpg')
-
-bnwImg1=cv2.cvtColor(image,cv2.COLOR_BGR2GRAY)
-
-bnwImg2=cv2.cvtColor(template,cv2.COLOR_BGR2GRAY)
-cv2.imshow('GRAY Template IMG',template)
-cv2.waitKey(0)
-
-""" Match """
-
-img_copy = image.copy()
-result = cv2.matchTemplate(img_copy, template, cv2.TM_CCOEFF_NORMED)
-min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(result)
-w, h = template.shape[1], template.shape[0]
-
-cropped = img_copy[max_loc[1]:max_loc[1]+h, max_loc[0]:max_loc[0]+w]
-cv2.imshow('GRAY Template IMG',cropped)
-cv2.waitKey(0)
+target_img=cv2.imread('./src/test/adhar5.jpg')
+template_img = cv2.imread('./src/imgs/templates/aadharFront.jpg')
 
 
+sift = cv2.xfeatures2d.SIFT_create()
+template_gray = cv2.cvtColor(template_img, cv2.COLOR_BGR2GRAY)
+template_kp, template_des = sift.detectAndCompute(template_gray, None)
 
+target_gray = cv2.cvtColor(target_img, cv2.COLOR_BGR2GRAY)
+target_kp, target_des = sift.detectAndCompute(target_gray, None)
+
+FLANN_INDEX_KDTREE = 0
+MIN_MATCH_COUNT = 100
+index_params = dict(algorithm = FLANN_INDEX_KDTREE, trees = 5)
+search_params = dict(checks = 50)
+flann = cv2.FlannBasedMatcher(index_params, search_params)
+matches = flann.knnMatch(template_des, target_des, k=2)
+
+good = []
+
+for m,n in matches:
+    if m.distance < 0.7*n.distance:
+        good.append(m)
+if len(good)>MIN_MATCH_COUNT:
+    src_pts = np.float32([ template_kp[m.queryIdx].pt for m in good ]).reshape(-1,1,2)
+    dst_pts = np.float32([ target_kp[m.trainIdx].pt for m in good ]).reshape(-1,1,2)
+    M, mask = cv2.findHomography(src_pts, dst_pts, cv2.RANSAC,5.0)
+    matchesMask = mask.ravel().tolist()
+    h,w,d = template_img.shape
+    pts = np.float32([ [0,0],[0,h-1],[w-1,h-1],[w-1,0] ]).reshape(-1,1,2)
+    dst = cv2.perspectiveTransform(pts,M)
+    target_img = cv2.polylines(target_img,[np.int32(dst)],True,255,3, cv2.LINE_AA)
+else:
+    print("Not enough matches are found - %d/%d" % (len(good),MIN_MATCH_COUNT))
+
+
+text = pytesseract.image_to_string(target_img, lang='eng')
+print(text)
 
 """ 
 image=cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
