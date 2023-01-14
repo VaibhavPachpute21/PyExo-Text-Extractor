@@ -18,16 +18,17 @@ class ExtractAndForward():
         opimg = cv2.imread(file)
         fulPath = os.getcwd()+'\\src\\outputs\\%s' % fileName
 
-        cv2.imwrite(fulPath ,opimg)
+        """    cv2.imwrite(fulPath ,opimg)
         cv2.imshow('Output Images', opimg)
-        cv2.waitKey(0)
+        cv2.waitKey(0) """
+
         ExtractData(file)
 
     def ImageSplitter(self, filePath, templatePath):
         img = cv2.imread(filePath)
         template = cv2.imread(templatePath)
         img = cv2.resize(
-            img, template.shape[:2][::-1], interpolation=cv2.INTER_LINEAR)
+        img, template.shape[:2][::-1], interpolation=cv2.INTER_LINEAR)
 
         sift = cv2.xfeatures2d.SIFT_create()
         kp1, des1 = sift.detectAndCompute(img, None)
