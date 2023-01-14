@@ -39,7 +39,6 @@ class ExtractData():
          with open(filePath, "w", encoding="utf-8") as file:
             file.write(str(text).replace('\t','').replace('\n\n','\n'))
 
-
         else:
             pass
 
