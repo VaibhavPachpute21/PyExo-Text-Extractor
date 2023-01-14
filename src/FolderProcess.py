@@ -59,7 +59,7 @@ class ExtractAndForward():
                                None, flags=cv2.DrawMatchesFlags_NOT_DRAW_SINGLE_POINTS)
 
         
-
+        
         for x in range(0, len(self.MatchedPaths)):
             self.ProvideOutput(self.MatchedPaths[x])
 

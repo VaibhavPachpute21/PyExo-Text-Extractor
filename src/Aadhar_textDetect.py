@@ -43,43 +43,60 @@ arr = []
 aadhar_arr = []
 for path in paths:
     fpath = folder_path+'/'+path
-
+    
     if fpath not in arr:
         arr.append(fpath)
-        with open(fpath, "r", encoding="utf-8") as file:
-            string = file.read()
 
-            aadhar_no_form = re.search(r"\d{4}\s\d{4}\s\d{4}", string).group(0)
+        
+        if "_aadhar.txt" in fpath:
+            with open(fpath, "r", encoding="utf-8") as file:
+                string = file.read()
 
-            full_name = string.split('जन्म')[0].split('\n')[-2]
+                aadhar_no_form = re.search(r"\d{4}\s\d{4}\s\d{4}", string).group(0)
 
-            result = re.sub(r'[^a-zA-Z]', '', full_name)
-            name_result = ''
-            for i, c in enumerate(result):
-                if c.isupper() and i != 0:
-                    name_result += " "
-                name_result += c
+                full_name = string.split('जन्म')[0].split('\n')[-2]
 
-            try:
-                dob = re.search(r'\d{2}/\d{2}/\d{4}', string).group(0)
+                result = re.sub(r'[^a-zA-Z]', '', full_name)
+                name_result = ''
+                for i, c in enumerate(result):
+                    if c.isupper() and i != 0:
+                        name_result += " "
+                    name_result += c
 
-            except:
-                pass
+                try:
+                    dob = re.search(r'\d{2}/\d{2}/\d{4}', string).group(0)
 
-            gender = ''
+                except:
+                    pass
 
-            if string.__contains__('Female' or 'FEMALE'):
-                gender = 'Female'
-            else:
-                gender = 'Male'
+                gender = ''
 
-            aadharObj = {
-                "Adhar_Card_No": aadhar_no_form,
-                "Full_Name": name_result,
-                "DOB": dob,
-                "Gender": gender
-            }
-            aadhar_arr.append(aadharObj)
+                if string.__contains__('Female' or 'FEMALE'):
+                    gender = 'Female'
+                else:
+                    gender = 'Male'
+
+                aadharObj = {
+                    "Adhar_Card_No": aadhar_no_form,
+                    "Full_Name": name_result,
+                    "DOB": dob,
+                    "Gender": gender
+                }
+                aadhar_arr.append(aadharObj)
+                
+        elif "_pan.txt" in fpath:
+            with open(fpath, "r", encoding="utf-8") as file:
+                string = file.read()
+
+                full_name = re.match('[A-Z]{5}[0-9]{4}[A-Z]{1}',string)
+                print(full_name)
+                
+
+            
+
+
+
+        
     else:
         pass
 
