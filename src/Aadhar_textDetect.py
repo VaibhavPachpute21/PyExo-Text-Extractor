@@ -26,14 +26,14 @@ class ExtractData():
                 file.write(string.replace('\t', '').replace('\n\n', '\n'))
 
         if ('Permanent Account Number' in string):
-            PanNO = str(string).split('Number')[1].split('\n')[1]
+            # PanNO = str(string).split('Number')[1].split('\n')[1]
+            PanNO=re.search(r"[A-Z]{5}[0-9]{4}[A-Z]",string).group(0)
             filePath = os.getcwd()+'\\src\\extracts\\%s_pan.txt'%PanNO
             with open(filePath, "w", encoding="utf-8") as file:
                 file.write(str(string).replace('\t', '').replace('\n\n', '\n'))
 
         else:
-            pass
-            # print(string)
+            print(string)
 
 
 folder_path = 'src/extracts'
