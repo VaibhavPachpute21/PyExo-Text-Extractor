@@ -33,7 +33,7 @@ class ExtractData():
                 file.write(str(string).replace('\t', '').replace('\n\n', '\n'))
 
         else:
-            print(string)
+            # print(string)
             pass
 
 
@@ -119,4 +119,4 @@ for path in paths:
 print("Aadhar Cards:")
 print(aadhar_arr)
 print("Pan Cards:")
-print(pan_arr);
+print(pan_arr)

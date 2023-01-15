@@ -7,7 +7,7 @@ from datetime import datetime
 pytesseract.pytesseract.tesseract_cmd = r'C:\\Program Files\\Tesseract-OCR\\tesseract.exe'
 os.environ['TESSDATA_PREFIX'] = 'C:\Program Files\Tesseract-OCR\\tessdata'
 
-path = "D:\Web\eCell\src\\test"
+path = os.getcwd()+"\\src\\test"
 allFiles = os.listdir(path)
 print(allFiles)
 for file in allFiles:
