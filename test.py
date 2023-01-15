@@ -15,7 +15,7 @@ for file in allFiles:
     # print(imPath)
     image = cv2.imread(imPath)
     text = pytesseract.image_to_string(image, lang='eng+hin+mar')
-    # print(str(text))
+    print(str(text))
 
     if str(text).__contains__('DRIVE' or 'DRIVING LICENCE'):
         driLicenceNo = re.search(r"\d{4}", str(text))
@@ -23,4 +23,6 @@ for file in allFiles:
         with open(filePath, "w", encoding="utf-8") as file:
             file.write(str(text).replace('\t', '').replace('\n\n', '\n'))
     else:
-        print("didn't found: ", imPath)
+        # print(str(text))
+        # print("didn't found: ", imPath)
+        pass
