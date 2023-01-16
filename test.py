@@ -5,7 +5,7 @@ import os
 import pandas as pd
 import pytesseract
 import table_ocr as tb
-file = os.getcwd()+"\\src\\test\\bank2.jpg"
+file = os.getcwd()+"\\src\\test\\bank3.jpg"
 
 
 
