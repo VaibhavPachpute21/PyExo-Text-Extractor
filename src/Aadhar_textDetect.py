@@ -11,14 +11,10 @@ class ExtractData():
     def __init__(self, file):
         self.file = file
         image = cv2.imread(file)
-        # print(file)
+        
         text = pytesseract.image_to_string(image, lang='eng+hin+mar')
         string = str(text)
-        # print(string)
 
-        # match2 = re.search(r"\d{4}\s\d{4}\s\d{4}", string)
-        # match3 = re.search(r'[A-Z]{5}[0-9]{4}[A-Z]{1}', string)
-        # for Aadhar Card
         if ("आधार" in string) or ("अधिकार" in string):
             aadhar_no = re.search(r"\d{4}\s\d{4}\s\d{4}", string).group(0)
             filePath = os.getcwd()+'\\src\\extracts\\%s_aadhar.txt' % aadhar_no
@@ -32,9 +28,24 @@ class ExtractData():
             with open(filePath, "w", encoding="utf-8") as file:
                 file.write(str(string).replace('\t', '').replace('\n\n', '\n'))
 
-        else:
-            # print(string)
-            pass
+        if ("Balance" in string) or ("Credit" in string) or ("Debit" in string) or ("Account Statement" in string) or ("Account Summary" in string) or ("Transaction" in string) or ("Transactions" in string) or ("Withdrawal" in string):
+            img_cv = cv2.imread(file)
+
+            img_resized = cv2.resize(img_cv,
+                                    (int(img_cv.shape[1] + (img_cv.shape[1] * .1)),
+                                    int(img_cv.shape[0] + (img_cv.shape[0] * .25))),
+                                    interpolation=cv2.INTER_AREA) 
+            img_rgb = cv2.cvtColor(img_resized,cv2.COLOR_BGR2RGB)
+            output = pytesseract.image_to_string(img_rgb)
+
+            file = file.split('/')[-1].split('.')[0]
+            filePath = os.getcwd()+'\\src\\extracts\\%s_statement.txt' % file
+
+            with open(filePath,'w', encoding="utf-8") as f: 
+                f.write(output) 
+
+            
+            
 
 
 folder_path = 'src/extracts'

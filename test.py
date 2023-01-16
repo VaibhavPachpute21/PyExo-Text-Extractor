@@ -9,7 +9,7 @@ file = os.getcwd()+"\\src\\test\\bank3.jpg"
 
 
 
-img_cv = cv2.imread(file)
+""" img_cv = cv2.imread(file)
 img_resized = cv2.resize(img_cv,
                          (int(img_cv.shape[1] + (img_cv.shape[1] * .1)),
                           int(img_cv.shape[0] + (img_cv.shape[0] * .25))),
@@ -17,7 +17,10 @@ img_resized = cv2.resize(img_cv,
 img_rgb = cv2.cvtColor(img_resized,cv2.COLOR_BGR2RGB)
 output = pytesseract.image_to_string(img_rgb)
 with open('test.csv','w') as f: 
-    f.write(output) 
+    f.write(output)  """
+
+file = 'src/test/bank1.jpg_statement.csv'
+print(file.split('/')[-1].split('.')[0])
 
 """ def invert_area(image, x, y, w, h, display=False):
     ones = np.copy(image)
