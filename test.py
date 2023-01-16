@@ -69,28 +69,28 @@ for file in voterList:
         husband_name=''
         gender=''
 
-    #     newArr=str(text).split('\n')
-    #     for i in newArr:
-    #         if ("Elector") in i :
-    #             electors_Name= i.split('Name')[1].replace(":","").strip()
-    #         if ("Eléctor") in i:
-    #             electors_Name= i.split('Name')[1].replace(":","").strip()
-    #         if ("Father") in i:
-    #             father_name= i.split('Name')[1].replace(":","").strip()
-    #         if ("Husband") in i:
-    #             husband_name=i.split('Name')[1].replace(":","").strip()
-    #         if "Male" in i:
-    #             gender="Male"
-    #         if "Female" in i:
-    #             gender="Female"
+        newArr=str(text).split('\n')
+        for i in newArr:
+            if ("Elector") in i :
+                electors_Name= i.split('Name')[1].replace(":","").strip()
+            if ("Eléctor") in i:
+                electors_Name= i.split('Name')[1].replace(":","").strip()
+            if ("Father") in i:
+                father_name= i.split('Name')[1].replace(":","").strip()
+            if ("Husband") in i:
+                husband_name=i.split('Name')[1].replace(":","").strip()
+            if "Male" in i:
+                gender="Male"
+            if "Female" in i:
+                gender="Female"
 
-    #     voterObj={
-    #         "Name:": electors_Name,
-    #         "Father Name:":father_name,
-    #         "Husband Name:":husband_name,
-    #         "Gender:":gender
-    #     }
-    #     voterArr.append(voterObj)
+        voterObj={
+            "Name:": electors_Name,
+            "Father Name:":father_name,
+            "Husband Name:":husband_name,
+            "Gender:":gender
+        }
+        voterArr.append(voterObj)
             
         with open(filePath, "w", encoding="utf-8") as file:
             file.write(str(text).replace('\t', '').replace('\n\n', '\n'))

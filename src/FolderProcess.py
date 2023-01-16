@@ -7,7 +7,6 @@ class ExtractAndForward():
     def __init__(self):
         pass
 
-    
     def ExtractAadhar(self):
         filesPaths = self.FindPaths()
         for x in filesPaths:
@@ -20,7 +19,6 @@ class ExtractAndForward():
         for path in paths:
             fpath = folder_path+'/'+path
             arr.append(fpath)
-
         return arr
 
 
