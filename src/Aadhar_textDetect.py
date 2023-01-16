@@ -126,12 +126,18 @@ for path in paths:
                 }
                 pan_arr.append(pan_obj);
                 # print(pan_arr);
-        elif "_statememt.txt" in fpath:
-            
+        elif "_statement.csv" in fpath:
+            with open(fpath, "r", encoding="utf-8") as file:
+                string = file.read()
+
+                if ("Date" in string):
+                    print(string.split('Date')[1].split('\n')[0])
+                    print("\n")
+
     else:
         pass
 
-print("Aadhar Cards:")
+""" print("Aadhar Cards:")
 print(aadhar_arr)
 print("Pan Cards:")
-print(pan_arr)
+print(pan_arr) """
