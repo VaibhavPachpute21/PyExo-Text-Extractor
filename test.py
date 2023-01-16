@@ -1,14 +1,46 @@
-import pytesseract
 import cv2
+import numpy as np
+import matplotlib.pyplot as plt
 import os
-import re
-from datetime import datetime
+import pandas as pd
+import pytesseract
+import table_ocr as tb
+file = os.getcwd()+"\\src\\test\\bank2.jpg"
 
-pytesseract.pytesseract.tesseract_cmd = r'C:\\Program Files\\Tesseract-OCR\\tesseract.exe'
-os.environ['TESSDATA_PREFIX'] = 'C:\Program Files\Tesseract-OCR\\tessdata'
 
-path = os.getcwd()+"\\src\\test"
 
+img_cv = cv2.imread(file)
+img_resized = cv2.resize(img_cv,
+                         (int(img_cv.shape[1] + (img_cv.shape[1] * .1)),
+                          int(img_cv.shape[0] + (img_cv.shape[0] * .25))),
+                         interpolation=cv2.INTER_AREA) 
+img_rgb = cv2.cvtColor(img_resized,cv2.COLOR_BGR2RGB)
+output = pytesseract.image_to_string(img_rgb)
+with open('test.csv','w') as f: 
+    f.write(output) 
+
+""" def invert_area(image, x, y, w, h, display=False):
+    ones = np.copy(image)
+    ones = 1
+    
+    image[ y:y+h , x:x+w ] = ones*255 - image[ y:y+h , x:x+w ] 
+    
+    if (display): 
+        cv2.imshow("inverted", image)
+        cv2.waitKey(0)
+        cv2.destroyAllWindows()
+    return image
+left_line_index = 17
+right_line_index = 20
+top_line_index = 0
+bottom_line_index = -1
+    
+cropped_image, (x, y, w, h) = get_ROI(img, horizontal, vertical, left_line_index, right_line_index, top_line_index, bottom_line_index)
+gray = get_grayscale(img)
+bw = get_binary(gray)
+bw = invert_area(bw, x, y, w, h, display=True)
+ """
+""" 
 voterList = ['voter.jpg','voter1.jpg','voter2.jpg','voter3.jpg','voter4.jpg']
 allFiles = os.listdir(path)
 
@@ -20,7 +52,7 @@ for file in voterList:
     image = cv2.imread(imPath)
     text = pytesseract.image_to_string(image, lang='eng+hin+mar')
     
-
+    print(text)
     if str(text).__contains__('ELECTION'):
         electors_Name=''
         father_name=''
@@ -51,4 +83,4 @@ for file in voterList:
         # print(str(text))
         # print("didn't found: ", imPath)
         pass
-print(voterArr)
+print(voterArr) """
