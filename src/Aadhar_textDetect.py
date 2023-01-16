@@ -2,7 +2,7 @@ import pytesseract
 import cv2
 import os
 import re
-
+import numpy as np
 pytesseract.pytesseract.tesseract_cmd = r'C:\\Program Files\\Tesseract-OCR\\tesseract.exe'
 os.environ['TESSDATA_PREFIX'] = 'C:\Program Files\Tesseract-OCR\\tessdata'
 
@@ -12,6 +12,7 @@ class ExtractData():
         self.file = file
         image = cv2.imread(file)
         
+
         text = pytesseract.image_to_string(image, lang='eng+hin+mar')
         string = str(text)
 
@@ -31,6 +32,8 @@ class ExtractData():
         if ("Balance" in string) or ("Credit" in string) or ("Debit" in string) or ("Account Statement" in string) or ("Account Summary" in string) or ("Transaction" in string) or ("Transactions" in string) or ("Withdrawal" in string):
             img_cv = cv2.imread(file)
 
+            
+
             img_resized = cv2.resize(img_cv,
                                     (int(img_cv.shape[1] + (img_cv.shape[1] * .1)),
                                     int(img_cv.shape[0] + (img_cv.shape[0] * .25))),
@@ -39,7 +42,7 @@ class ExtractData():
             output = pytesseract.image_to_string(img_rgb)
 
             file = file.split('/')[-1].split('.')[0]
-            filePath = os.getcwd()+'\\src\\extracts\\%s_statement.txt' % file
+            filePath = os.getcwd()+'\\src\\extracts\\%s_statement.csv' % file
 
             with open(filePath,'w', encoding="utf-8") as f: 
                 f.write(output) 
@@ -123,7 +126,8 @@ for path in paths:
                 }
                 pan_arr.append(pan_obj);
                 # print(pan_arr);
-        
+        elif "_statememt.txt" in fpath:
+            
     else:
         pass
 

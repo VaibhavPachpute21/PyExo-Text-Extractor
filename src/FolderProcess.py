@@ -1,6 +1,6 @@
 import os
-import cv2
 from Aadhar_textDetect import ExtractData
+
 
 
 class ExtractAndForward():
