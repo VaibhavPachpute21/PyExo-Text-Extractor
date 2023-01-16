@@ -7,3 +7,4 @@ pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tessera
 
 
 
+file = os.getcwd()+"\\src\\test\\bank1.jpg"
