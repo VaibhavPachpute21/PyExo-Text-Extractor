@@ -49,7 +49,7 @@ class ExtractData():
                     if ("Date" in row):
                         spliter=row
                         if ("Balance" in spliter):
-                            formData=spliter.replace(' ',',')+ str(output).split(spliter)[1].replace(' ',',')
+                            formData=str(output).split(spliter)[0]+spliter.replace(' ',',')+ str(output).split(spliter)[1].replace(' ',',')
                             file = file.split('/')[-1].split('.')[0]
                             filePath = os.getcwd()+'\\src\\extracts\\%s_statement.csv' % file
                             with open(filePath, 'w', encoding="utf-8") as f:
