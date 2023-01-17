@@ -1,5 +1,5 @@
 import os
-from Aadhar_textDetect import ExtractData
+from DocumentTextDetection import ExtractData
 
 
 
