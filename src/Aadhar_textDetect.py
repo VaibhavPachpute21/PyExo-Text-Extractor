@@ -47,7 +47,6 @@ class ExtractData():
 
             file = file.split('/')[-1].split('.')[0]
             filePath = os.getcwd()+'\\src\\extracts\\%s_statement.csv' % file
-
             with open(filePath, 'w', encoding="utf-8") as f:
                 f.write(output)
 
@@ -141,8 +140,12 @@ for path in paths:
                         husband_name = i.split('Name')[1].replace(":", "").strip()
                     if "Male" in i:
                         gender = "Male"
+                    if "MALE" in i :
+                        gender="Male"
                     if "Female" in i:
                         gender = "Female"
+                    if "FEMALE" in i:
+                        gender="Female"
 
                 voterObj = {
                     "Name:": electors_Name,
