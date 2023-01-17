@@ -55,3 +55,9 @@ class ExtractData():
                             with open(filePath, 'w', encoding="utf-8") as f:
                                 f.write(formData)
 
+        if ("Basic Salary" in string) or ("Provident Fund" in string) or ("Allowance" in string):
+            file = file.split('/')[-1].split('.')[0]
+            filePath = os.getcwd()+'\\src\\extracts\\%s_salarySlip.txt' % file
+            with open(filePath, "w", encoding="utf-8") as file:
+                file.write(str(string).replace('\t', '').replace('\n\n', '\n'))
+

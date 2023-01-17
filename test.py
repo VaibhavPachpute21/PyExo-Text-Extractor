@@ -5,22 +5,22 @@ import os
 import pandas as pd
 import pytesseract
 import table_ocr as tb
-file = os.getcwd()+"\\src\\test\\passport1.jpg"
+file = os.getcwd()+"\\src\\test\\salaryslip1.jpg"
 
 pytesseract.pytesseract.tesseract_cmd = r'C:\\Program Files\\Tesseract-OCR\\tesseract.exe'
 os.environ['TESSDATA_PREFIX'] = 'C:\Program Files\Tesseract-OCR\\tessdata'
 
 image=cv2.imread(file)
 # image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-ret, thresh1 = cv2.threshold(image, 120, 255, cv2.THRESH_TOZERO)
-cv2.imshow("",thresh1)
-cv2.waitKey(0)
+# ret, thresh1 = cv2.threshold(image, 120, 255, cv2.THRESH_TOZERO)
+# cv2.imshow("",thresh1)
+# cv2.waitKey(0)
 
-text = pytesseract.image_to_string(thresh1, lang='eng+hin+mar')
+text = pytesseract.image_to_string(image, lang='eng+hin+mar')
 print(str(text))
 
 
-filePath = os.getcwd()+'\\src\\extracts\\pass.txt'
+filePath = os.getcwd()+'\\src\\extracts\\salaryslip1.txt'
 with open(filePath, 'w', encoding="utf-8") as f:
     f.write(str(text))
 
