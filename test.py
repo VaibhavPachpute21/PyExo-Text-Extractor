@@ -5,34 +5,40 @@ import os
 import pandas as pd
 import pytesseract
 import table_ocr as tb
-file = os.getcwd()+"\\src\\test\\adhar2.jpg"
+file = os.getcwd()+"\\src\\test\\passport1.jpg"
 
 pytesseract.pytesseract.tesseract_cmd = r'C:\\Program Files\\Tesseract-OCR\\tesseract.exe'
 os.environ['TESSDATA_PREFIX'] = 'C:\Program Files\Tesseract-OCR\\tessdata'
 
-# image=cv2.imread(file)
+image=cv2.imread(file)
 # image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-# ret, thresh1 = cv2.threshold(image, 120, 255, cv2.THRESH_TRUNC)
-# cv2.imshow("",thresh1)
-# cv2.waitKey(0)
+ret, thresh1 = cv2.threshold(image, 120, 255, cv2.THRESH_TOZERO)
+cv2.imshow("",thresh1)
+cv2.waitKey(0)
 
-# text = pytesseract.image_to_string(thresh1, lang='eng+hin+mar')
-# print(str(text))
+text = pytesseract.image_to_string(thresh1, lang='eng+hin+mar')
+print(str(text))
 
-fpath='D:\Web\eCell\src\extracts\detecttable_statement.csv'
-with open(fpath, "r", encoding="utf-8") as file:
-                string = file.read()
-                newArr=string.split('\n')
-                for row in newArr:
-                    if ("Date" in row):
-                        spliter=row
-                        if ("Balance" in spliter):
 
-                            formData=spliter.replace(' ',',')+ string.split(spliter)[1].replace(' ',',')
-                            print(formData)
-                            filePath = os.getcwd()+'\\src\\extracts\\testtt_statement.csv'
-                            with open(filePath, 'w', encoding="utf-8") as f:
-                                f.write(formData)
+filePath = os.getcwd()+'\\src\\extracts\\pass.txt'
+with open(filePath, 'w', encoding="utf-8") as f:
+    f.write(str(text))
+
+
+# fpath='D:\Web\eCell\src\extracts\detecttable_statement.csv'
+# with open(fpath, "r", encoding="utf-8") as file:
+#                 string = file.read()
+#                 newArr=string.split('\n')
+#                 for row in newArr:
+#                     if ("Date" in row):
+#                         spliter=row
+#                         if ("Balance" in spliter):
+
+#                             formData=spliter.replace(' ',',')+ string.split(spliter)[1].replace(' ',',')
+#                             print(formData)
+#                             filePath = os.getcwd()+'\\src\\extracts\\testtt_statement.csv'
+#                             with open(filePath, 'w', encoding="utf-8") as f:
+#                                 f.write(formData)
 
 
 
