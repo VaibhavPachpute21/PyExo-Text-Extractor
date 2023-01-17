@@ -44,11 +44,16 @@ class ExtractData():
                                      interpolation=cv2.INTER_AREA)
             img_rgb = cv2.cvtColor(img_resized, cv2.COLOR_BGR2RGB)
             output = pytesseract.image_to_string(img_rgb)
-
-            file = file.split('/')[-1].split('.')[0]
-            filePath = os.getcwd()+'\\src\\extracts\\%s_statement.csv' % file
-            with open(filePath, 'w', encoding="utf-8") as f:
-                f.write(output)
+            newArr=str(output).split('\n')
+            for row in newArr:
+                    if ("Date" in row):
+                        spliter=row
+                        if ("Balance" in spliter):
+                            formData=spliter.replace(' ',',')+ str(output).split(spliter)[1].replace(' ',',')
+                            file = file.split('/')[-1].split('.')[0]
+                            filePath = os.getcwd()+'\\src\\extracts\\%s_statement.csv' % file
+                            with open(filePath, 'w', encoding="utf-8") as f:
+                                f.write(formData)
 
 
 folder_path = 'src/extracts'
@@ -158,19 +163,21 @@ for path in paths:
         if "_statement.csv" in fpath:
             with open(fpath, "r", encoding="utf-8") as file:
                 string = file.read()
+                fileName=fpath.split('/')[-1].split('.')[0]
                 newArr=string.split('\n')
                 for row in newArr:
                     if ("Date" in row):
                         spliter=row
                         if ("Balance" in spliter):
-                            print(spliter)
+                            pass
+                            # print(string.split(spliter)[1])
                
     else:
         pass
 
-print("Aadhar Cards:")
-print(aadhar_arr)
-print("Pan Cards:")
-print(pan_arr)
-print("Voter cards")
-print(voterArr)
+# print("Aadhar Cards:")
+# print(aadhar_arr)
+# print("Pan Cards:")
+# print(pan_arr)
+# print("Voter cards")
+# print(voterArr)

@@ -10,51 +10,36 @@ file = os.getcwd()+"\\src\\test\\adhar2.jpg"
 pytesseract.pytesseract.tesseract_cmd = r'C:\\Program Files\\Tesseract-OCR\\tesseract.exe'
 os.environ['TESSDATA_PREFIX'] = 'C:\Program Files\Tesseract-OCR\\tessdata'
 
-image=cv2.imread(file)
-image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-ret, thresh1 = cv2.threshold(image, 120, 255, cv2.THRESH_TRUNC)
-cv2.imshow("",thresh1)
-cv2.waitKey(0)
+# image=cv2.imread(file)
+# image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+# ret, thresh1 = cv2.threshold(image, 120, 255, cv2.THRESH_TRUNC)
+# cv2.imshow("",thresh1)
+# cv2.waitKey(0)
 
-text = pytesseract.image_to_string(thresh1, lang='eng+hin+mar')
+# text = pytesseract.image_to_string(thresh1, lang='eng+hin+mar')
+# print(str(text))
 
-print(str(text))
+fpath='D:\Web\eCell\src\extracts\detecttable_statement.csv'
+with open(fpath, "r", encoding="utf-8") as file:
+                string = file.read()
+                newArr=string.split('\n')
+                for row in newArr:
+                    if ("Date" in row):
+                        spliter=row
+                        if ("Balance" in spliter):
+
+                            formData=spliter.replace(' ',',')+ string.split(spliter)[1].replace(' ',',')
+                            print(formData)
+                            filePath = os.getcwd()+'\\src\\extracts\\testtt_statement.csv'
+                            with open(filePath, 'w', encoding="utf-8") as f:
+                                f.write(formData)
 
 
-""" img_cv = cv2.imread(file)
-img_resized = cv2.resize(img_cv,
-                         (int(img_cv.shape[1] + (img_cv.shape[1] * .1)),
-                          int(img_cv.shape[0] + (img_cv.shape[0] * .25))),
-                         interpolation=cv2.INTER_AREA) 
-img_rgb = cv2.cvtColor(img_resized,cv2.COLOR_BGR2RGB)
-output = pytesseract.image_to_string(img_rgb)
-with open('test.csv','w') as f: 
-    f.write(output)  """
 
 # file = 'src/test/bank1.jpg_statement.csv'
 # print(file.split('/')[-1].split('.')[0])
 
-""" def invert_area(image, x, y, w, h, display=False):
-    ones = np.copy(image)
-    ones = 1
-    
-    image[ y:y+h , x:x+w ] = ones*255 - image[ y:y+h , x:x+w ] 
-    
-    if (display): 
-        cv2.imshow("inverted", image)
-        cv2.waitKey(0)
-        cv2.destroyAllWindows()
-    return image
-left_line_index = 17
-right_line_index = 20
-top_line_index = 0
-bottom_line_index = -1
-    
-cropped_image, (x, y, w, h) = get_ROI(img, horizontal, vertical, left_line_index, right_line_index, top_line_index, bottom_line_index)
-gray = get_grayscale(img)
-bw = get_binary(gray)
-bw = invert_area(bw, x, y, w, h, display=True)
- """
+
 """ 
 voterList = ['voter.jpg','voter1.jpg','voter2.jpg','voter3.jpg','voter4.jpg']
 allFiles = os.listdir(path)
