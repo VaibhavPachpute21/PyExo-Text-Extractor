@@ -5,8 +5,20 @@ import os
 import pandas as pd
 import pytesseract
 import table_ocr as tb
-file = os.getcwd()+"\\src\\test\\bank3.jpg"
+file = os.getcwd()+"\\src\\test\\adhar2.jpg"
 
+pytesseract.pytesseract.tesseract_cmd = r'C:\\Program Files\\Tesseract-OCR\\tesseract.exe'
+os.environ['TESSDATA_PREFIX'] = 'C:\Program Files\Tesseract-OCR\\tessdata'
+
+image=cv2.imread(file)
+image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+ret, thresh1 = cv2.threshold(image, 120, 255, cv2.THRESH_TRUNC)
+cv2.imshow("",thresh1)
+cv2.waitKey(0)
+
+text = pytesseract.image_to_string(thresh1, lang='eng+hin+mar')
+
+print(str(text))
 
 
 """ img_cv = cv2.imread(file)
@@ -19,8 +31,8 @@ output = pytesseract.image_to_string(img_rgb)
 with open('test.csv','w') as f: 
     f.write(output)  """
 
-file = 'src/test/bank1.jpg_statement.csv'
-print(file.split('/')[-1].split('.')[0])
+# file = 'src/test/bank1.jpg_statement.csv'
+# print(file.split('/')[-1].split('.')[0])
 
 """ def invert_area(image, x, y, w, h, display=False):
     ones = np.copy(image)
