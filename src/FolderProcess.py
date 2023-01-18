@@ -59,7 +59,7 @@ class ExtractAndForward():
 
     def FindPaths(self):
 
-        choice = int(input("Enter 0 for pdf or 1 for images"))
+        choice = int(input("Enter 0 for pdf or 1 for word file or 2 for images "))
 
         if choice == 0:
             RecieveImages = self.ConvertPdfToImages(os.getcwd()+'\\src\\test-pdf\\test.pdf')
