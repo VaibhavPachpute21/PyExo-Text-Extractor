@@ -39,7 +39,7 @@ class ExtractAndForward():
     def ExtractAadhar(self):
         filesPaths = self.FindPaths()
         for x in filesPaths:
-            print(x)
+            
             ExtractData(x)
 
     def FindPaths(self):
