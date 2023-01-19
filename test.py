@@ -5,7 +5,7 @@ import os
 import pandas as pd
 import pytesseract
 import table_ocr as tb
-file = os.getcwd()+"\\src\\test\\salaryslip1.jpg"
+file = os.getcwd()+"\\src\\test\\data\\voter\\voter1.jpg"
 
 pytesseract.pytesseract.tesseract_cmd = r'C:\\Program Files\\Tesseract-OCR\\tesseract.exe'
 os.environ['TESSDATA_PREFIX'] = 'C:\Program Files\Tesseract-OCR\\tessdata'
@@ -20,9 +20,9 @@ text = pytesseract.image_to_string(image, lang='eng+hin+mar')
 print(str(text))
 
 
-filePath = os.getcwd()+'\\src\\extracts\\salaryslip1.txt'
-with open(filePath, 'w', encoding="utf-8") as f:
-    f.write(str(text))
+# filePath = os.getcwd()+'\\src\\extracts\\salaryslip1.txt'
+# with open(filePath, 'w', encoding="utf-8") as f:
+#     f.write(str(text))
 
 
 # fpath='D:\Web\eCell\src\extracts\detecttable_statement.csv'
