@@ -5,17 +5,24 @@ import os
 import pandas as pd
 import pytesseract
 import table_ocr as tb
-file = os.getcwd()+"\\src\\test\\data\\voter\\voter1.jpg"
-
+file = os.getcwd()+"\\src\\test\\data\\voter\\voter2.jpg"
+# file='D:\Web\eCell\src\\test\pan-card.jpg'
 pytesseract.pytesseract.tesseract_cmd = r'C:\\Program Files\\Tesseract-OCR\\tesseract.exe'
 os.environ['TESSDATA_PREFIX'] = 'C:\Program Files\Tesseract-OCR\\tessdata'
 
 image=cv2.imread(file)
-# image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-# ret, thresh1 = cv2.threshold(image, 120, 255, cv2.THRESH_TOZERO)
-# cv2.imshow("",thresh1)
-# cv2.waitKey(0)
+# image=cv2.cvtColor(image,cv2.COLOR_BGR2GRAY)
+ret,thresh1 = cv2.threshold(image,100,255,cv2.THRESH_BINARY)
 
+titles = ['Original Image', 'Binary Thresholding']
+images = [image, thresh1]
+for i in range(2):
+    plt.figure(figsize=(20,20))
+    plt.subplot(2,3,i+1),plt.imshow(images[i],'gray',vmin=0,vmax=255)
+    plt.title(titles[i])
+    plt.xticks([]),plt.yticks([])
+cv2.imshow("",image)
+cv2.waitKey(0)
 text = pytesseract.image_to_string(image, lang='eng+hin+mar')
 print(str(text))
 

@@ -5,13 +5,12 @@ from PIL import Image
 import docx2txt
 
 
-class ExtractAndForward():
+class PyExo():
     def __init__(self):
         pass
 
-    
-    def ConvertWordToImages(self,filepath):
-        text = docx2txt.process(filepath,r"src\\wordtoimg")
+    def Extract_From_Doc(self, filepath):
+        text = docx2txt.process(filepath, r"src\\wordtoimg")
 
         folder_path = 'src/wordtoimg'
         arr = []
@@ -19,38 +18,28 @@ class ExtractAndForward():
         for path in paths:
             fpath = folder_path+'/'+path
             arr.append(fpath)
-
         if len(arr) == len(paths):
             return arr
 
-
-
-    def ConvertPdfToImages(self,pdfFile):
+    def Extract_From_Pdf(pdfFile):
         doc = fitz.open(pdfFile)
-
-        
         for page_number in range(doc.page_count):
-            
             page = doc[page_number]
-            
             pix = page.get_pixmap()
-            
+            if (os.path.exists(os.path.join(os.getcwd()+'\\src', 'pdftoimg'))):
+               pass
+            else:
+                os.mkdir(os.path.join(os.getcwd()+'\\src', 'pdftoimg'))
             filePath = os.getcwd()+f'\\src\\pdftoimg\\{page_number}.png'
             pix.save(filePath)
-
             folder_path = 'src/pdftoimg'
             arr = []
             paths = os.listdir(folder_path)
             for path in paths:
                 fpath = folder_path+'/'+path
                 arr.append(fpath)
-
             if len(arr) == doc.page_count:
                 return arr
-
-
-            
-
 
     def ExtractAadhar(self):
         filesPaths = self.FindPaths()
@@ -59,10 +48,12 @@ class ExtractAndForward():
 
     def FindPaths(self):
 
-        choice = int(input("Enter 0 for pdf or 1 for word file or 2 for images "))
+        choice = int(
+            input("Enter 0 for pdf or 1 for word file or 2 for images "))
 
         if choice == 0:
-            RecieveImages = self.ConvertPdfToImages(os.getcwd()+'\\src\\test-pdf\\test.pdf')
+            RecieveImages = self.Extract_From_Pdf(
+                os.getcwd()+'\\src\\test-pdf\\test.pdf')
             return RecieveImages
         elif choice == 1:
             folder_path = 'src/test'
@@ -73,9 +64,10 @@ class ExtractAndForward():
                 arr.append(fpath)
             return arr
         else:
-            Images = self.ConvertWordToImages(os.getcwd()+'\\src\\test-word\\The Heading.docx')
+            Images = self.Extract_From_Doc(
+                os.getcwd()+'\\src\\test-word\\The Heading.docx')
             return Images
 
 
-files = ExtractAndForward()
-files.ExtractAadhar()
+# files = PyExo()
+# files.ExtractAadhar()
