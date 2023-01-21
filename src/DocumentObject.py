@@ -67,7 +67,8 @@ def CaptureData():
                             'नाम / Name')[-1].strip().split('\n')[0]
                         # print('fname',full_name)
                     pan_obj = {
-                        "Pan No: ": PanNO,
+                        if(PanNO != null):
+                             "Pan No: ": PanNO,
                         "Name: ": full_name,
                         "Father's Name": father_name,
                         "DOB: ": dob

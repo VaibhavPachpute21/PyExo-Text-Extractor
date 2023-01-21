@@ -40,7 +40,7 @@ class PyExo():
             if len(arr) == doc.page_count:
                 return arr
 
-    def ExtractAadhar(filePaths):
+    def ExtractDocumentsData(filePaths):
         if len(filePaths) > 0:
             for x in range(0,len(filePaths)):
                 ExtractData(filePaths[x])
@@ -76,4 +76,4 @@ class PyExo():
 
 
 # files = PyExo()
-# files.ExtractAadhar()
+# files.ExtractDocumentsData()
