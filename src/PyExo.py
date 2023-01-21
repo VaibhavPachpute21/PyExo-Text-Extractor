@@ -8,37 +8,47 @@ class PyExo():
     def __init__(self):
         pass
 
-    def Extract_From_Doc(self, filepath):
-        text = docx2txt.process(filepath, r"src\\wordtoimg")
+    def Extract_From_Doc(wordFile):
 
-        folder_path = 'src/wordtoimg'
-        arr = []
-        paths = os.listdir(folder_path)
-        for path in paths:
-            fpath = folder_path+'/'+path
-            arr.append(fpath)
-        if len(arr) == len(paths):
-            return arr
-
-    def Extract_From_Pdf(pdfFile):
-        doc = fitz.open(pdfFile)
-        for page_number in range(doc.page_count):
-            page = doc[page_number]
-            pix = page.get_pixmap()
-            if (os.path.exists(os.path.join(os.getcwd()+'\\src', 'pdftoimg'))):
-               pass
-            else:
-                os.mkdir(os.path.join(os.getcwd()+'\\src', 'pdftoimg'))
-            filePath = os.getcwd()+f'\\src\\pdftoimg\\{page_number}.png'
-            pix.save(filePath)
-            folder_path = 'src/pdftoimg'
+        if str(wordFile).endswith(".docx"):
+            text = docx2txt.process(wordFile, r"src\\wordtoimg")
+            
+            folder_path = 'src/wordtoimg'
             arr = []
             paths = os.listdir(folder_path)
             for path in paths:
                 fpath = folder_path+'/'+path
                 arr.append(fpath)
-            if len(arr) == doc.page_count:
+            if len(arr) == len(paths):
                 return arr
+        else:
+            print("Provide Word document")
+            return []
+
+    def Extract_From_Pdf(pdfFile):
+        print(pdfFile)
+        if str(pdfFile).endswith(".pdf"):
+            doc = fitz.open(pdfFile)
+            for page_number in range(doc.page_count):
+                page = doc[page_number]
+                pix = page.get_pixmap()
+                if (os.path.exists(os.path.join(os.getcwd()+'\\src', 'pdftoimg'))):
+                    pass
+                else:
+                    os.mkdir(os.path.join(os.getcwd()+'\\src', 'pdftoimg'))
+                filePath = os.getcwd()+f'\\src\\pdftoimg\\{page_number}.png'
+                pix.save(filePath)
+                folder_path = 'src/pdftoimg'
+                arr = []
+                paths = os.listdir(folder_path)
+                for path in paths:
+                    fpath = folder_path+'/'+path
+                    arr.append(fpath)
+                if len(arr) == doc.page_count:
+                    return arr
+        else:
+            print("Provide pdf document")
+            return []
 
     def ExtractDocumentsData(filePaths):
         if len(filePaths) > 0:
