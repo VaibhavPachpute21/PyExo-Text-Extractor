@@ -10,6 +10,8 @@ def CaptureData():
         pan_arr = []
         voterArr=[]
         salarySlipArr=[]
+        passport_arr=[]
+        data=[]
 
         for path in paths:
             fpath = folder_path+'/'+path
@@ -67,10 +69,10 @@ def CaptureData():
                                 'नाम / Name')[-1].strip().split('\n')[0]
                             # print('fname',full_name)
                         pan_obj = {
-                            "Pan No: ": PanNO,
-                            "Name: ": full_name,
+                            "Pan No": PanNO,
+                            "Name": full_name,
                             "Father's Name": father_name,
-                            "DOB: ": dob
+                            "DOB": dob
                         }
                         pan_arr.append(pan_obj)
                 
@@ -101,10 +103,10 @@ def CaptureData():
                                 gender="Female"
 
                         voterObj = {
-                            "Name:": electors_Name,
-                            "Father Name:": father_name,
-                            "Husband Name:": husband_name,
-                            "Gender:": gender
+                            "Name": electors_Name,
+                            "Father Name": father_name,
+                            "Husband Name": husband_name,
+                            "Gender": gender
                         }
                         voterArr.append(voterObj)
 
@@ -163,14 +165,34 @@ def CaptureData():
 
 
                         salSlipObject={
-                                "Employee Name:": empname,
+                                "Employee Name": empname,
                                 "Employee Code":empcode,
                                 "Pan No":PanNO,
                                 "Provident Fund":pf,
-                                "UAN Number:" : uan,
-                                "Total Earnings:":earn
+                                "UAN Number" : uan,
+                                "Total Earnings":earn
                             }
                         salarySlipArr.append(salSlipObject)
+            
+                elif "_passport.txt" in fpath:
+                    with open(fpath, "r", encoding="utf-8") as file:
+                        string = file.read().strip()
+                        stringArr=string.split('\n')
+                        dt=re.findall(r'\d{2}/\d{2}/\d{4}', string)
+                        lastLine=stringArr[-1]
+                        slastLine=stringArr[-2]
+
+                        passportObj={
+                            "PassportNo":lastLine.split('<')[0],
+                            "Type":slastLine.split('<')[0],
+                            "Nationality":slastLine.split('<')[1][0:3],
+                            "First Name":slastLine.split('<')[3],
+                            "Last Name":slastLine.split('<')[1].replace(slastLine.split('<')[1][0:3],''),
+                            "DOB":dt[0],
+                            "Date of issue:":dt[1],
+                            "Date of Expiry:":dt[2]
+                        }
+                        passport_arr.append(passportObj)
             else:
                 pass
 
@@ -182,3 +204,6 @@ def CaptureData():
         print(voterArr)
         print("Salary Slip")
         print(salarySlipArr)
+        print("Passport")
+        print(passport_arr)
+
