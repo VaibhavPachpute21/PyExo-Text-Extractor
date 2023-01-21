@@ -61,3 +61,5 @@ class ExtractData():
             with open(filePath, "w", encoding="utf-8") as file:
                 file.write(str(string).replace('\t', '').replace('\n\n', '\n'))
 
+        
+

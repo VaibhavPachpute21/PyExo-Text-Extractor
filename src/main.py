@@ -4,3 +4,4 @@ import os
 
 Files = PyExo.Extract_From_Pdf(pdfFile=r'C:\\Users\\Dell\\OneDrive\\Documents\\Python\\E-cell\\Text-Extractor\\src\\test-pdf\\test.pdf')
 data = PyExo.ExtractAadhar(filePaths=Files)
+

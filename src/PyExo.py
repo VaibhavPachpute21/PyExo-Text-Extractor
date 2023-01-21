@@ -42,13 +42,15 @@ class PyExo():
 
     def ExtractAadhar(filePaths):
         if len(filePaths) > 0:
-            for x in filePaths:
-                ExtractData(x)
+            for x in range(0,len(filePaths)):
+                ExtractData(filePaths[x])
 
-                try:
-                    CaptureData()
-                except:
-                    print("Error")
+                if x == len(filePaths)-1:
+                    
+                    try:
+                        CaptureData()
+                    except:
+                        print("Error")
 
     def FindPaths(self):
 
