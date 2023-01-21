@@ -5,7 +5,7 @@ import os
 import pandas as pd
 import pytesseract
 import table_ocr as tb
-file = os.getcwd()+"\\src\\test\\data\\voter\\voter2.jpg"
+file = os.getcwd()+"\\src\\test\\passport1.jpg"
 # file='D:\Web\eCell\src\\test\pan-card.jpg'
 pytesseract.pytesseract.tesseract_cmd = r'C:\\Program Files\\Tesseract-OCR\\tesseract.exe'
 os.environ['TESSDATA_PREFIX'] = 'C:\Program Files\Tesseract-OCR\\tessdata'
