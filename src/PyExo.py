@@ -62,16 +62,13 @@ class PyExo():
                     except:
                         print("Error")
 
-    def FindPaths(self):
+    def Extract_From_Images(folderPath):
 
-        choice = int(
-            input("Enter 0 for pdf or 1 for word file or 2 for images "))
+        
 
-        if choice == 0:
-            RecieveImages = self.Extract_From_Pdf(
-                os.getcwd()+'\\src\\test-pdf\\test.pdf')
-            return RecieveImages
-        elif choice == 1:
+        if str(folderPath).endswith('.pdf') or str(folderPath).endswith('.docx'):
+            pass
+        else:
             folder_path = 'src/test'
             arr = []
             paths = os.listdir(folder_path)
@@ -79,10 +76,7 @@ class PyExo():
                 fpath = folder_path+'/'+path
                 arr.append(fpath)
             return arr
-        else:
-            Images = self.Extract_From_Doc(
-                os.getcwd()+'\\src\\test-word\\The Heading.docx')
-            return Images
+      
 
 
 # files = PyExo()

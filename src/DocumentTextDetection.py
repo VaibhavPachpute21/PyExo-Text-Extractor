@@ -2,7 +2,9 @@ import pytesseract
 import cv2
 import os
 import re
-import numpy as np
+
+
+
 pytesseract.pytesseract.tesseract_cmd = r'C:\\Program Files\\Tesseract-OCR\\tesseract.exe'
 os.environ['TESSDATA_PREFIX'] = 'C:\Program Files\Tesseract-OCR\\tessdata'
 
@@ -19,7 +21,9 @@ class ExtractData():
         
 
         if ("आधार" in string) or ("अधिकार" in string):
-            print("Checking for Aadhaar data in ",file.split('/')[-1])
+            fileSplitted = file.split('/')[-1]
+            print("Checking for Aadhaar data in ",fileSplitted)  
+                
             aadhar_no = re.search(r"\d{4}\s\d{4}\s\d{4}", string).group(0)
             filePath = os.getcwd()+'\\src\\extracts\\%s_aadhar.txt' % aadhar_no
             with open(filePath, "w", encoding="utf-8") as file:
