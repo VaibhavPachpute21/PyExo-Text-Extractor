@@ -5,52 +5,52 @@ import os
 import pandas as pd
 import pytesseract
 import table_ocr as tb
-file = os.getcwd()+"\\src\\test\\passport1.jpg"
+import re
+
+file = os.getcwd()+"\\src\\test\\passport.jpg"
 # file='D:\Web\eCell\src\\test\pan-card.jpg'
 pytesseract.pytesseract.tesseract_cmd = r'C:\\Program Files\\Tesseract-OCR\\tesseract.exe'
 os.environ['TESSDATA_PREFIX'] = 'C:\Program Files\Tesseract-OCR\\tessdata'
 
-image=cv2.imread(file)
+# image=cv2.imread(file)
 # image=cv2.cvtColor(image,cv2.COLOR_BGR2GRAY)
-ret,thresh1 = cv2.threshold(image,100,255,cv2.THRESH_BINARY)
+# ret,thresh1 = cv2.threshold(image,100,255,cv2.THRESH_BINARY)
 
-titles = ['Original Image', 'Binary Thresholding']
-images = [image, thresh1]
-for i in range(2):
-    plt.figure(figsize=(20,20))
-    plt.subplot(2,3,i+1),plt.imshow(images[i],'gray',vmin=0,vmax=255)
-    plt.title(titles[i])
-    plt.xticks([]),plt.yticks([])
-cv2.imshow("",image)
-cv2.waitKey(0)
-text = pytesseract.image_to_string(image, lang='eng+hin+mar')
-print(str(text))
+# titles = ['Original Image', 'Binary Thresholding']
+# images = [image, thresh1]
+# for i in range(2):
+#     plt.figure(figsize=(20,20))
+#     plt.subplot(2,3,i+1),plt.imshow(images[i],'gray',vmin=0,vmax=255)
+#     plt.title(titles[i])
+#     plt.xticks([]),plt.yticks([])
+# cv2.imshow("",image)
+# cv2.waitKey(0)
+# text = pytesseract.image_to_string(image, lang='eng+hin+mar')
 
-
-# filePath = os.getcwd()+'\\src\\extracts\\salaryslip1.txt'
+filePath = os.getcwd()+'\\src\\extracts\\passport.txt'
 # with open(filePath, 'w', encoding="utf-8") as f:
 #     f.write(str(text))
 
 
-# fpath='D:\Web\eCell\src\extracts\detecttable_statement.csv'
-# with open(fpath, "r", encoding="utf-8") as file:
-#                 string = file.read()
-#                 newArr=string.split('\n')
-#                 for row in newArr:
-#                     if ("Date" in row):
-#                         spliter=row
-#                         if ("Balance" in spliter):
+with open(filePath, "r", encoding="utf-8") as file:
 
-#                             formData=spliter.replace(' ',',')+ string.split(spliter)[1].replace(' ',',')
-#                             print(formData)
-#                             filePath = os.getcwd()+'\\src\\extracts\\testtt_statement.csv'
-#                             with open(filePath, 'w', encoding="utf-8") as f:
-#                                 f.write(formData)
+    string = file.read().strip()
+    stringArr=string.split('\n')
+    dt=re.findall(r'\d{2}/\d{2}/\d{4}', string)
+    lastLine=stringArr[-1]
+    slastLine=stringArr[-2]
+    print("passportNo:",lastLine.split('<')[0])
+    print("Type:",slastLine.split('<')[0])
+    print("Nationality:",slastLine.split('<')[1][0:3])
+    print("First Name:",slastLine.split('<')[3])
+    print("Last Name:",slastLine.split('<')[1].replace(slastLine.split('<')[1][0:3],''))
+    print("DOB:",dt[0])
+    print("Date of issue:",dt[1])
+    print("Date of Expiry:",dt[2])
+    
 
+    
 
-
-# file = 'src/test/bank1.jpg_statement.csv'
-# print(file.split('/')[-1].split('.')[0])
 
 
 """ 
