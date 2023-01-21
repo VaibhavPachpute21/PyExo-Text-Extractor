@@ -15,5 +15,5 @@ data = PyExo.ExtractDocumentsData(filePaths=WordImgs)  """
 
 
 # Extract from Images
-ImageLinks = PyExo.Extract_From_Images(folderPath=r'C:\\Users\\Dell\\OneDrive\\Documents\\Python\\E-cell\\Text-Extractor\\src\\test') 
+ImageLinks = PyExo.Extract_From_Images(folderPath=r'D:\Web\\eCell\src\\test') 
 data = PyExo.ExtractDocumentsData(filePaths=ImageLinks)

@@ -70,6 +70,14 @@ class ExtractData():
             filePath = os.getcwd()+'\\src\\extracts\\%s_salarySlip.txt' % file
             with open(filePath, "w", encoding="utf-8") as file:
                 file.write(str(string).replace('\t', '').replace('\n\n', '\n'))
+        
+        if ('REPUBLIC OF INDIA' in string) or ('Passport' in string):
+            print("Checking for Passport data in ",file.split('/')[-1])
+            file = file.split('/')[-1].split('.')[0]
+            filePath = os.getcwd()+'\\src\\extracts\\%s_passport.txt' % file
+            with open(filePath, "w", encoding="utf-8") as file:
+                file.write(str(string).replace('\t', '').replace('\n\n', '\n'))
+        
 
         
 
