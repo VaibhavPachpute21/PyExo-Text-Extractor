@@ -196,14 +196,22 @@ def CaptureData():
             else:
                 pass
 
-        print("Aadhar Cards:")
-        print(aadhar_arr)
-        print("Pan Cards:")
-        print(pan_arr)
-        print("Voter cards")
-        print(voterArr)
-        print("Salary Slip")
-        print(salarySlipArr)
-        print("Passport")
-        print(passport_arr)
+        # print("Aadhar Cards:")
+        # print(aadhar_arr)
+        # print("Pan Cards:")
+        # print(pan_arr)
+        # print("Voter cards")
+        # print(voterArr)
+        # print("Salary Slip")
+        # print(salarySlipArr)
+        # print("Passport")
+        # print(passport_arr)
+        retArray={
+            "Adhar Cards":aadhar_arr,
+            "Pan Cards":pan_arr,
+            "Voter Cards":voterArr,
+            "Salary Slips":salarySlipArr,
+            "Passports":passport_arr
+        }
+        return retArray
 

@@ -58,7 +58,8 @@ class PyExo():
                 if x == len(filePaths)-1:
                     
                     try:
-                        CaptureData()
+                        capturedData=CaptureData()
+                        return capturedData;
                     except:
                         print("Error")
 
