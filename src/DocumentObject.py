@@ -16,7 +16,6 @@ def CaptureData():
             if fpath not in arr:
                 arr.append(fpath)
                 if "_aadhar.txt" in fpath:
-                    print("Extracting Aadhar Card data")
                     with open(fpath, "r", encoding="utf-8") as file:
                         string = file.read()
                         aadhar_no_form = re.search(
@@ -48,7 +47,6 @@ def CaptureData():
                         aadhar_arr.append(aadharObj)
 
                 elif "_pan.txt" in fpath:
-                    print("Extracting Pan Card data")
                     with open(fpath, "r", encoding="utf-8") as file:
                         string = file.read()
                         full_name = ''
@@ -77,7 +75,6 @@ def CaptureData():
                         pan_arr.append(pan_obj)
                 
                 elif "_voter.txt" in fpath:
-                    print("Extracting Voter Card data")
                     with open(fpath, "r", encoding="utf-8") as file:
                         string = file.read()
                         electors_Name = ''
@@ -112,7 +109,6 @@ def CaptureData():
                         voterArr.append(voterObj)
 
                 elif "_statement.csv" in fpath:
-                    print("Extracting Bank statement data")
                     with open(fpath, "r", encoding="utf-8") as file:
                         string = file.read()
                         fileName=fpath.split('/')[-1].split('.')[0]
@@ -125,7 +121,6 @@ def CaptureData():
                                     # print(string.split(spliter)[1])
                 
                 elif "_salarySlip.txt" in fpath:
-                    print("Extracting Salry Slip data")
                     with open(fpath, "r", encoding="utf-8") as file:
                         empcode=''
                         empname=''
