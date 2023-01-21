@@ -49,9 +49,6 @@ class ExtractAndForward():
                 return arr
 
 
-            
-
-
     def ExtractAadhar(self):
         filesPaths = self.FindPaths()
         for x in filesPaths:
