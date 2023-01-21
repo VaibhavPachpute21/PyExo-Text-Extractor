@@ -1,9 +1,8 @@
 import os
 from DocumentTextDetection import ExtractData
 import fitz
-from PIL import Image
 import docx2txt
-
+from DocumentObject import CaptureData
 
 class PyExo():
     def __init__(self):
@@ -41,10 +40,15 @@ class PyExo():
             if len(arr) == doc.page_count:
                 return arr
 
-    def ExtractAadhar(self):
-        filesPaths = self.FindPaths()
-        for x in filesPaths:
-            ExtractData(x)
+    def ExtractAadhar(filePaths):
+        if len(filePaths) > 0:
+            for x in filePaths:
+                ExtractData(x)
+
+                try:
+                    CaptureData()
+                except:
+                    print("Error")
 
     def FindPaths(self):
 
