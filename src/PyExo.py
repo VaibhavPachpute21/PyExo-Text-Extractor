@@ -59,7 +59,6 @@ class PyExo():
         if len(filePaths) > 0:
             for x in range(0,len(filePaths)):
                 img=cv2.imread(filePaths[x])
-                # cv2.imshow("img",img)
                 model = load_model('./src/model/keras_model.h5', compile=False)
                 labels = open('./src/model/labels.txt', 'r').readlines()
                 image = cv2.resize(img, (224, 224), interpolation=cv2.INTER_AREA)
