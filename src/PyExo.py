@@ -3,6 +3,9 @@ from DocumentTextDetection import ExtractData
 import fitz
 import docx2txt
 from DocumentObject import CaptureData
+import cv2
+from keras.models import load_model
+import numpy as np
 
 class PyExo():
     def __init__(self):
@@ -51,12 +54,27 @@ class PyExo():
             return []
 
     def ExtractDocumentsData(filePaths):
+        documentsList=['aadhaar','pan','voter','salary','bank','passport']
         if len(filePaths) > 0:
             for x in range(0,len(filePaths)):
-                ExtractData(filePaths[x])
+                print(filePaths[x])
+                img=cv2.imread(filePaths[x])
+                # cv2.imshow("img",img)
+                model = load_model('./src/model/keras_model.h5', compile=False)
+                labels = open('./src/model/labels.txt', 'r').readlines()
+                image = cv2.resize(img, (224, 224), interpolation=cv2.INTER_AREA)
+                image = np.asarray(image, dtype=np.float32).reshape(1, 224, 224, 3)
+                image = (image / 127.5) - 1
+                probabilities = model.predict(image)
+                probaboility=labels[np.argmax(probabilities)].split(' ')[1]
+
+                if (probaboility.strip() in documentsList):
+                    print("Document identified as",probaboility)
+                    ExtractData(filePaths[x])
+                else:
+                    print("Document Not Matched")
 
                 if x == len(filePaths)-1:
-                    
                     try:
                         capturedData=CaptureData()
                         return capturedData;
@@ -65,12 +83,10 @@ class PyExo():
 
     def Extract_From_Images(folderPath):
 
-        
-
         if str(folderPath).endswith('.pdf') or str(folderPath).endswith('.docx'):
             pass
         else:
-            folder_path = 'src/test'
+            folder_path = folderPath
             arr = []
             paths = os.listdir(folder_path)
             for path in paths:
