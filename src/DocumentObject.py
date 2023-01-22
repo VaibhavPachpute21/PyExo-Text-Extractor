@@ -34,7 +34,7 @@ def CaptureData():
                         except:
                             pass
 
-                        gender = ''
+                        gender = 'NA'
                         if string.__contains__('Female' or 'FEMALE'):
                             gender = 'Female'
                         else:
@@ -51,8 +51,8 @@ def CaptureData():
                 elif "_pan.txt" in fpath:
                     with open(fpath, "r", encoding="utf-8") as file:
                         string = file.read()
-                        full_name = ''
-                        father_name = ''
+                        full_name = 'NA'
+                        father_name = 'NA'
                         PanNO = re.search(r"[A-Z]{5}[0-9]{4}[A-Z]", string).group(0)
                         try:
                             dob = re.search(r'\d{2}/\d{2}/\d{4}', string).group(0)
@@ -80,9 +80,9 @@ def CaptureData():
                     with open(fpath, "r", encoding="utf-8") as file:
                         string = file.read()
                         electors_Name = ''
-                        father_name = ''
-                        husband_name = ''
-                        gender = ''
+                        father_name = 'NA'
+                        husband_name = 'NA'
+                        gender = 'NA'
                         newArr = string.split('\n')
                         for i in newArr:
                             if ("Elector") in i:
@@ -124,13 +124,12 @@ def CaptureData():
                 
                 elif "_salarySlip.txt" in fpath:
                     with open(fpath, "r", encoding="utf-8") as file:
-                        empcode=''
-                        empname=''
-                        PanNO=''
-                        basicSal=''
-                        pf=''
-                        uan=''
-                        earn=''
+                        empcode='NA'
+                        empname='NA'
+                        PanNO='NA'
+                        pf='NA'
+                        uan='NA'
+                        earn='NA'
                         string = file.read()
                         salSlipLine=string.split('\n')
                         for line in salSlipLine:
@@ -147,7 +146,7 @@ def CaptureData():
                                     PanNO = re.search(r"[A-Z]{5}[0-9]{4}[A-Z]", line).group(0)
                                 except:
                                     pass
-                                print(PanNO)
+                                # print(PanNO)
                             if ("Basic Salary" in line):
                                 lw=line.split()
                                 basicSal=lw[lw.index("Salary")+1]

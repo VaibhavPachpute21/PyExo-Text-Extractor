@@ -9,13 +9,13 @@ data = PyExo.ExtractDocumentsData(filePaths=Files)cls
  """
 
 # Extract from Word
-""" WordImgs = PyExo.Extract_From_Doc(wordFile=r'C:\\Users\\Dell\\OneDrive\\Documents\\Python\\E-cell\\Text-Extractor\\src\\test-word\\The Heading.docx')
-data = PyExo.ExtractDocumentsData(filePaths=WordImgs)  """
+# WordImgs = PyExo.Extract_From_Doc(wordFile=r'C:\\Users\\Dell\\OneDrive\\Documents\\Python\\E-cell\\Text-Extractor\\src\\test-word\\The Heading.docx')
+# data = PyExo.ExtractDocumentsData(filePaths=WordImgs) 
 
 
 
 # Extract from Images
-ImageLinks = PyExo.Extract_From_Images(folderPath=r'D:\Web\\eCell\src\\test') 
-data = PyExo.ExtractDocumentsData(filePaths=ImageLinks)
+data = PyExo.Extract_From_Images(folderPath=r'D:\Web\\eCell\src\\test') 
+
 
 print("data",data)

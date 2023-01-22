@@ -57,7 +57,6 @@ class PyExo():
         documentsList=['aadhaar','pan','voter','salary','bank','passport']
         if len(filePaths) > 0:
             for x in range(0,len(filePaths)):
-                print(filePaths[x])
                 img=cv2.imread(filePaths[x])
                 # cv2.imshow("img",img)
                 model = load_model('./src/model/keras_model.h5', compile=False)
@@ -65,11 +64,11 @@ class PyExo():
                 image = cv2.resize(img, (224, 224), interpolation=cv2.INTER_AREA)
                 image = np.asarray(image, dtype=np.float32).reshape(1, 224, 224, 3)
                 image = (image / 127.5) - 1
-                probabilities = model.predict(image)
+                probabilities = model(image)
                 probaboility=labels[np.argmax(probabilities)].split(' ')[1]
 
                 if (probaboility.strip() in documentsList):
-                    print("Document identified as",probaboility)
+                    print("\nDocument identified as",probaboility.strip())
                     ExtractData(filePaths[x])
                 else:
                     print("Document Not Matched")
@@ -91,8 +90,10 @@ class PyExo():
             paths = os.listdir(folder_path)
             for path in paths:
                 fpath = folder_path+'/'+path
-                arr.append(fpath)
-            return arr
+                if(str(fpath).endswith('.png') or str(fpath).endswith('.PNG') or str(fpath).endswith('.jpg') or str(fpath).endswith('.JPG') or str(fpath).endswith('.JPEG') or str(fpath).endswith('.jpeg') ):
+                    arr.append(fpath)
+            res=PyExo.ExtractDocumentsData(filePaths=arr)
+            return res;
       
 
 
