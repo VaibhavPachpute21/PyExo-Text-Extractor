@@ -4,18 +4,13 @@ from PyExo import PyExo
 
 
 # Extract from pdf
-""" Files = PyExo.Extract_From_Pdf(pdfFile=r'C:\\Users\\Dell\\OneDrive\\Documents\\Python\\E-cell\\Text-Extractor\\src\\test-pdf\\test.pdf')
-data = PyExo.ExtractDocumentsData(filePaths=Files)cls
- """
+# data = PyExo.Extract_From_Pdf(pdfFile=r'D:\Web\\eCell\src\\test\\test.pdf')
 
 # Extract from Word
-# WordImgs = PyExo.Extract_From_Doc(wordFile=r'C:\\Users\\Dell\\OneDrive\\Documents\\Python\\E-cell\\Text-Extractor\\src\\test-word\\The Heading.docx')
-# data = PyExo.ExtractDocumentsData(filePaths=WordImgs) 
-
-
+data = PyExo.Extract_From_Doc(wordFile=r'D:\Web\\eCell\src\\test\\The Heading.docx')
 
 # Extract from Images
-data = PyExo.Extract_From_Images(folderPath=r'D:\Web\\eCell\src\\test') 
+# data = PyExo.Extract_From_Images(folderPath=r'D:\Web\\eCell\src\\test') 
 
 
 print("data",data)

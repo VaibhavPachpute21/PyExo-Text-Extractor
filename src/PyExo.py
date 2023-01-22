@@ -12,7 +12,6 @@ class PyExo():
         pass
 
     def Extract_From_Doc(wordFile):
-
         if str(wordFile).endswith(".docx"):
             text = docx2txt.process(wordFile, r"src\\wordtoimg")
             
@@ -23,7 +22,8 @@ class PyExo():
                 fpath = folder_path+'/'+path
                 arr.append(fpath)
             if len(arr) == len(paths):
-                return arr
+                res=PyExo.ExtractDocumentsData(filePaths=arr)
+                return res;
         else:
             print("Provide Word document")
             return []
@@ -48,7 +48,8 @@ class PyExo():
                     fpath = folder_path+'/'+path
                     arr.append(fpath)
                 if len(arr) == doc.page_count:
-                    return arr
+                    res=PyExo.ExtractDocumentsData(filePaths=arr)
+                    return res;
         else:
             print("Provide pdf document")
             return []
