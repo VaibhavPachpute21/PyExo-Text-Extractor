@@ -2,7 +2,8 @@ import pytesseract
 import cv2
 import os
 import re
-
+pytesseract.pytesseract.tesseract_cmd = r'C:\\Program Files\\Tesseract-OCR\\tesseract.exe'
+os.environ['TESSDATA_PREFIX'] = 'C:\Program Files\Tesseract-OCR\\tessdata'
 
 
 class ExtractData():

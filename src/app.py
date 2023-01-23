@@ -6,6 +6,7 @@ import cloudinary.uploader
 import cloudinary.api
 import requests
 import os
+import json
 
 cloudinary.config(
   cloud_name = "dvvzlzude",
@@ -33,7 +34,11 @@ def ProcessDoc():
     filePath = os.getcwd()+'\\src\\test\\downloaded_pdf.pdf'
     with open(filePath, "wb") as f:
         f.write(response.content)
-    PyExo.Extract_From_Pdf()
+    
+    data=PyExo.Extract_From_Pdf(pdfFile=str(filePath))
+    with open('output.json',"w") as f:
+        json.dump(data, f, ensure_ascii=False, indent=4)
+    
     return request.data
 
  
