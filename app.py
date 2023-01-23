@@ -14,7 +14,7 @@ cloudinary.config(
   api_secret = "JAPvS4ZO-hlUtSipa6-BzpRfg8M"
 )
 
-app = Flask(__name__, template_folder='templates')
+app = Flask(__name__, template_folder='./src/templates')
  
 @app.route('/')
 def index():

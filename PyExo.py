@@ -1,8 +1,8 @@
 import os
-from DocumentTextDetection import ExtractData
+from DataExtractionModule import ExtractData
 import fitz
 import docx2txt
-from DocumentObject import CaptureData
+from OutputModule import CaptureData
 import cv2
 from keras.models import load_model
 import numpy as np
