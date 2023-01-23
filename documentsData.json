@@ -1,0 +1,138 @@
+{
+    "Adhar Cards": [
+        {
+            "Adhar_Card_No": "2304 2515 9949",
+            "Full_Name": "Sanjay Deore",
+            "DOB": "25/06/2013",
+            "Gender": "Male"
+        },
+        {
+            "Adhar_Card_No": "9940 3097 1325",
+            "Full_Name": "Ind Yadaw",
+            "DOB": "01/01/2003",
+            "Gender": "Female"
+        }
+    ],
+    "Pan Cards": [
+        {
+            "Pan No": "BFAPL9762A",
+            "Name": "SELHUVO LOHE",
+            "Father's Name": "CHINEYI LOHE",
+            "DOB": "10/09/2001"
+        },
+        {
+            "Pan No": "GQBPK8700C",
+            "Name": "KOCHERLA SRIKANTH",
+            "Father's Name": "MUKKANTI KOCHERLA",
+            "DOB": "04/05/1997"
+        }
+    ],
+    "Voter Cards": [
+        {
+            "Name": "Priyanka Vilas Upadhye",
+            "Father Name": "\u096b185 Upadhye",
+            "Husband Name": "NA",
+            "Gender": "NA"
+        },
+        {
+            "Name": "Rachana Sharma",
+            "Father Name": "NA",
+            "Husband Name": "\u00a7. K. Sharma",
+            "Gender": "Female"
+        },
+        {
+            "Name": "Sahinur Rahaman Majumadar",
+            "Father Name": "Babul Mia",
+            "Husband Name": "NA",
+            "Gender": "Male"
+        },
+        {
+            "Name": "Rachana Sharma",
+            "Father Name": "NA",
+            "Husband Name": "\u00a7. K. Sharma",
+            "Gender": "Female"
+        },
+        {
+            "Name": "Me Umar",
+            "Father Name": "1 Rafeck Misiri",
+            "Husband Name": "NA",
+            "Gender": "Male"
+        }
+    ],
+    "Salary Slips": [
+        {
+            "Employee Name": "Vaibhav Pachpute",
+            "Employee Code": "CSSL2021187",
+            "Pan No": "NA",
+            "Provident Fund": "840.00",
+            "UAN Number": "101760976352",
+            "Total Earnings": "9,160"
+        },
+        {
+            "Employee Name": "Vaibhav Pachpute",
+            "Employee Code": "Tocation",
+            "Pan No": "GICPP4261H",
+            "Provident Fund": "840.00",
+            "UAN Number": "NA",
+            "Total Earnings": "9,160"
+        },
+        {
+            "Employee Name": "Vaibhav Pachpute",
+            "Employee Code": "Tocation",
+            "Pan No": "GICPP4261H",
+            "Provident Fund": "840.00",
+            "UAN Number": "NA",
+            "Total Earnings": "9,160"
+        },
+        {
+            "Employee Name": "Vaibhav Pachpute",
+            "Employee Code": "CSSL2021187",
+            "Pan No": "NA",
+            "Provident Fund": "840.00",
+            "UAN Number": "101760976352",
+            "Total Earnings": "9,160"
+        }
+    ],
+    "Passports": [
+        {
+            "PassportNo": "#7802055",
+            "Type": "P",
+            "Nationality": "IND",
+            "First Name": "A I SHWARYAK",
+            "Last Name": "RAI",
+            "DOB": "01/11/1973",
+            "Date of issue:": "02/05/2006",
+            "Date of Expiry:": "01/05/2016"
+        },
+        {
+            "PassportNo": "H9137927",
+            "Type": "P",
+            "Nationality": "IND",
+            "First Name": "MAQSOOD",
+            "Last Name": "ALAM",
+            "DOB": "14/08/1973",
+            "Date of issue:": "48/02/2010",
+            "Date of Expiry:": "17/02/2020"
+        },
+        {
+            "PassportNo": "F7802033",
+            "Type": "P",
+            "Nationality": "IND",
+            "First Name": "A I SHWARYAK",
+            "Last Name": "RAI",
+            "DOB": "04/11/1973",
+            "Date of issue:": "02/05/2006",
+            "Date of Expiry:": "01/05/2016"
+        },
+        {
+            "PassportNo": "H9137927",
+            "Type": "P",
+            "Nationality": "IND",
+            "First Name": "MAQSOOD",
+            "Last Name": "ALAM",
+            "DOB": "14/08/1973",
+            "Date of issue:": "18/02/2010",
+            "Date of Expiry:": "17/02/2020"
+        }
+    ]
+}
