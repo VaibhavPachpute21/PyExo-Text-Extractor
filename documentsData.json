@@ -1,0 +1,57 @@
+{
+    "Adhar Cards": [
+        {
+            "Adhar_Card_No": "2304 2515 9949",
+            "Full_Name": "Suyash Sanjay Deore",
+            "DOB": "25/06/2013",
+            "Gender": "Male"
+        },
+        {
+            "Adhar_Card_No": "9940 3097 1325",
+            "Full_Name": "Ind Yadaw",
+            "DOB": "01/01/2003",
+            "Gender": "Female"
+        }
+    ],
+    "Pan Cards": [
+        {
+            "Pan No": "GQBPK8700C",
+            "Name": "KOCHERLA SRIKANTH",
+            "Father's Name": "MUKKANTI KOCHERLA",
+            "DOB": "04/05/1997"
+        }
+    ],
+    "Voter Cards": [
+        {
+            "Name": "Rachana Sharma",
+            "Father Name": "NA",
+            "Husband Name": "\u00a7. K. Sharma",
+            "Gender": "Female"
+        },
+        {
+            "Name": "Priyanka Vilas Upadhye",
+            "Father Name": "\u096b185 Upadhye",
+            "Husband Name": "NA",
+            "Gender": "NA"
+        }
+    ],
+    "Salary Slips": [
+        {
+            "Employee Name": "Vaibhav Pachpute",
+            "Employee Code": "CSSL2021187",
+            "Pan No": "NA",
+            "Provident Fund": "840.00",
+            "UAN Number": "101760976352",
+            "Total Earnings": "9,160"
+        },
+        {
+            "Employee Name": "Vaibhav Pachpute",
+            "Employee Code": "Tocation",
+            "Pan No": "GICPP4261H",
+            "Provident Fund": "840.00",
+            "UAN Number": "NA",
+            "Total Earnings": "9,160"
+        }
+    ],
+    "Passports": []
+}

@@ -36,8 +36,8 @@ def ProcessDoc():
         f.write(response.content)
     
     data=PyExo.Extract_From_Pdf(pdfFile=str(filePath))
-    with open('output.json',"w") as f:
-        json.dump(data, f, ensure_ascii=False, indent=4)
+    print(data)
+    
     
     return request.data
 

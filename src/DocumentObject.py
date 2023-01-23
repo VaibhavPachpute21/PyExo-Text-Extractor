@@ -1,5 +1,6 @@
 import os
 import re
+import json
 
 def CaptureData():
         
@@ -212,5 +213,8 @@ def CaptureData():
             "Salary Slips":salarySlipArr,
             "Passports":passport_arr
         }
+        json_string = json.dumps(retArray,indent=4)
+        with open('documentsData.json', 'w') as outfile:
+            outfile.write(json_string)
         return retArray
 
