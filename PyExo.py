@@ -97,5 +97,3 @@ class PyExo():
       
 
 
-# files = PyExo()
-# files.ExtractDocumentsData()

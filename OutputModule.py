@@ -12,7 +12,6 @@ def CaptureData():
         voterArr=[]
         salarySlipArr=[]
         passport_arr=[]
-        data=[]
 
         for path in paths:
             fpath = folder_path+'/'+path
@@ -63,12 +62,12 @@ def CaptureData():
                             full_name = string.split('पिता')[0].strip().split('\n')[-1]
                             father_name = string.split(
                                 'पिता')[1].strip().split('\n')[1]
-                            # print(father_name)
+                            
 
                         elif string.__contains__('नाम / Name'):
                             full_name = string.split(
                                 'नाम / Name')[-1].strip().split('\n')[0]
-                            # print('fname',full_name)
+                            
                         pan_obj = {
                             "Pan No": PanNO,
                             "Name": full_name,
@@ -121,7 +120,7 @@ def CaptureData():
                                 spliter=row
                                 if ("Balance" in spliter):
                                     pass
-                                    # print(string.split(spliter)[1])
+                                    
                 
                 elif "_salarySlip.txt" in fpath:
                     with open(fpath, "r", encoding="utf-8") as file:
@@ -141,21 +140,19 @@ def CaptureData():
                             if ("Employee Name" in line):
                                 lw=line.split()
                                 empname=lw[lw.index("Name")+1] +' '+lw[lw.index("Name")+2]
-                                # print(empname)
                             if ("PAN" in line):
                                 try:
                                     PanNO = re.search(r"[A-Z]{5}[0-9]{4}[A-Z]", line).group(0)
                                 except:
                                     pass
-                                # print(PanNO)
+                                
                             if ("Basic Salary" in line):
                                 lw=line.split()
                                 basicSal=lw[lw.index("Salary")+1]
-                                # print(basicSal)
+                                
                             if ("Provident Fund" in line):
                                 lw=line.split()
                                 pf=lw[lw.index("Fund")+1]
-                                # print(pf)
                             if ('UAN Number' in line):
                                 lw=line.split()
                                 uan=lw[lw.index("Number")+1]
@@ -196,16 +193,7 @@ def CaptureData():
             else:
                 pass
 
-        # print("Aadhar Cards:")
-        # print(aadhar_arr)
-        # print("Pan Cards:")
-        # print(pan_arr)
-        # print("Voter cards")
-        # print(voterArr)
-        # print("Salary Slip")
-        # print(salarySlipArr)
-        # print("Passport")
-        # print(passport_arr)
+
         retArray={
             "Adhar Cards":aadhar_arr,
             "Pan Cards":pan_arr,
