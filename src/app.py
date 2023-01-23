@@ -5,6 +5,7 @@ import cloudinary
 import cloudinary.uploader
 import cloudinary.api
 import requests
+import os
 
 cloudinary.config(
   cloud_name = "dvvzlzude",
@@ -29,8 +30,10 @@ def ProcessDoc():
     pdf_url = cloudinary.utils.cloudinary_url(public_id, format="pdf")[0]
     response = requests.get(pdf_url)
     # Save the PDF to a local file
-    with open("downloaded_pdf.pdf", "wb") as f:
+    filePath = os.getcwd()+'\\src\\test\\downloaded_pdf.pdf'
+    with open(filePath, "wb") as f:
         f.write(response.content)
+    PyExo.Extract_From_Pdf()
     return request.data
 
  
